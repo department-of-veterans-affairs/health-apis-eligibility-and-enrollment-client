@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+  <!--
+    Exclusions can be defined here and should include a comment on why the finding can be ignored
+  -->
+  <!--
+    The three lines of code that are pointed to by this finding are used to add attribute
+    values to SOAPElements within the SOAPHeader. These values, while not explicitly
+    used by any subsequent instruction, are used in the generation of the SOAPMessage
+    that is eventually sent to E&E as a request and are therefore should not be
+    considered dead.
+  -->
+  <Match>
+    <Class name="gov.va.api.health.queenelizabeth.ee.SoapMessageGenerator"/>
+    <Bug pattern="DLS_DEAD_LOCAL_STORE"/>
+  </Match>
+  <!--
+    Line 84 of ConnectionProvider opens a url connection from the ee.endpoint.url in properties.
+    To prevent Server Side Request forgery, the code checks the url protocol is HTTPS (E&E
+    uses one way TLS) and that the request address is not local. If the url fails either of
+    these checks, the connection is never made and the request fails.
+  -->
+  <Match>
+    <Class name="gov.va.api.health.queenelizabeth.ee.impl.ConnectionProvider"/>
+    <Bug pattern="URLCONNECTION_SSRF_FD"/>
+  </Match>
+</FindBugsFilter>
