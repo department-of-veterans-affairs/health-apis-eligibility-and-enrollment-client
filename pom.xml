@@ -11,5 +11,6 @@
   <packaging>pom</packaging>
   <modules>
     <module>queen-elizabeth</module>
+    <module>ee-artifacts</module>
   </modules>
 </project>
