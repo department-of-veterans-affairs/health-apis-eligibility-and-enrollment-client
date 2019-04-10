@@ -1,1 +1,1 @@
-# health-apis-enrollment-and-elligibility-client
+# health-apis-enrollment-and-eligibility-client
