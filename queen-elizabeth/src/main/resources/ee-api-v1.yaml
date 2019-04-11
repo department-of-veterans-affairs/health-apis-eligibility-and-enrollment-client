@@ -16,7 +16,7 @@ paths:
         description: ICN of a Person
         schema:
           type: string
-          pattern: "[0-9]{10}V[0-9]{6}"
+          pattern: "[0-9]{10,16}V[0-9]{6,12}"
       responses:
         '200':
           description: Eligibility Response
