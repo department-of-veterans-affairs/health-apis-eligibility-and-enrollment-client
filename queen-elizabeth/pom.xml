@@ -8,7 +8,7 @@
     <relativePath/>
   </parent>
   <artifactId>queen-elizabeth</artifactId>
-  <version>1.1.30</version>
+  <version>1.1.31-SNAPSHOT</version>
   <packaging>jar</packaging>
   <properties>
     <jacoco.coverage>0.90</jacoco.coverage>
@@ -17,7 +17,7 @@
     <dependency>
       <groupId>gov.va.api.health</groupId>
       <artifactId>ee-artifacts</artifactId>
-      <version>1.1.30</version>
+      <version>1.1.31-SNAPSHOT</version>
     </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
