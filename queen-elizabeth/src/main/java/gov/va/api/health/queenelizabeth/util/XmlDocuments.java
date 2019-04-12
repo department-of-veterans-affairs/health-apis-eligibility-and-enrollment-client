@@ -60,7 +60,7 @@ public final class XmlDocuments {
       transformerFactory
           .newTransformer()
           .transform(new DOMSource(element), new StreamResult(stringResult));
-      return stringResult.toString().replaceAll("<eligibility\\ xmlns=\"\">", "<eligibility>");
+      return stringResult.toString();
     } catch (SOAPException | TransformerException e) {
       throw new WriteFailed(e);
     }

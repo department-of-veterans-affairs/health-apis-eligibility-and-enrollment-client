@@ -7,7 +7,7 @@
       <summary>
         <communityCareEligibilityInfo>
           <eligibilities>
-            <eligibility xmlns="">
+            <eligibility>
               <vceDescription>Mileage eligibility for the Veterans Choice Program</vceDescription>
               <vceEffectiveDate>2019-02-21T20:39:33.000-06:00</vceEffectiveDate>
               <vceCode>M</vceCode>
