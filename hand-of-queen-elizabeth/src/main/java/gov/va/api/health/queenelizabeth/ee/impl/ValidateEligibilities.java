@@ -7,16 +7,12 @@ import gov.va.api.health.queenelizabeth.util.XmlDocuments;
 import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.w3c.dom.Document;
 
 /** Combines EE requesting and response validation. */
 @Slf4j
-@Component
-@AllArgsConstructor(onConstructor = @__({@Autowired}))
+@AllArgsConstructor
 public class ValidateEligibilities implements Eligibilities {
-
   private final EligibilityInfo eligibilityInfo;
 
   private Document parse(SoapMessageGenerator soapMessageGenerator, String xml) {

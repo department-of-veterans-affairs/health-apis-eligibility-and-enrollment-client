@@ -1,10 +1,8 @@
 package gov.va.api.health.queenelizabeth.ee;
 
 import javax.xml.soap.SOAPMessage;
-import org.springframework.stereotype.Component;
 
 /** The primary interface for sending requests to the EE Service. */
-@Component
 public interface Eligibilities {
   String request(SoapMessageGenerator soapMessageGenerator);
 
@@ -44,7 +42,6 @@ public interface Eligibilities {
   }
 
   class UnknownIdentityInSearchParameter extends EligibilitiesException {
-
     public UnknownIdentityInSearchParameter(SoapMessageGenerator soapMessageGenerator) {
       super(soapMessageGenerator.createGetEeSummarySoapRequest().toString());
     }

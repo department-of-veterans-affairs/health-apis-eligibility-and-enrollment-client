@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+  <env:Header/>
+  <env:Body>
+    <env:Fault>
+      <faultcode>env:Server</faultcode>
+      <faultstring>Unable to invoke SOA ESR due to: Failed to locate remote EJB [ejb/PersonServiceBean]; nested exception is javax.naming.CommunicationException: t3://vaausappesr801.aac.va.gov:7402: [RJVM:000575]Destination 10.226.85.177, 7402 unreachable.; nested exception is: java.net.ConnectException: Connection refused; [RJVM:000576]No available router to destination.; nested exception is: java.rmi.ConnectException: [RJVM:000576]No available router to destination. [Root exception is java.net.ConnectException: t3://vaausappesr801.aac.va.gov:7402: [RJVM:000575]Destination 10.226.85.177, 7402 unreachable.; nested exception is: java.net.ConnectException: Connection refused; [RJVM:000576]No available router to destination.; nested exception is: java.rmi.ConnectException: [RJVM:000576]No available router to destination.]</faultstring>
+      <detail>
+        <detail>Unable to invoke SOA ESR due to: Failed to locate remote EJB [ejb/PersonServiceBean]; nested exception is javax.naming.CommunicationException: t3://vaausappesr801.aac.va.gov:7402: [RJVM:000575]Destination 10.226.85.177, 7402 unreachable.; nested exception is: java.net.ConnectException: Connection refused; [RJVM:000576]No available router to destination.; nested exception is: java.rmi.ConnectException: [RJVM:000576]No available router to destination. [Root exception is java.net.ConnectException: t3://vaausappesr801.aac.va.gov:7402: [RJVM:000575]Destination 10.226.85.177, 7402 unreachable.; nested exception is: java.net.ConnectException: Connection refused; [RJVM:000576]No available router to destination.; nested exception is: java.rmi.ConnectException: [RJVM:000576]No available router to destination.]</detail>
+      </detail>
+    </env:Fault>
+  </env:Body>
+</env:Envelope>
