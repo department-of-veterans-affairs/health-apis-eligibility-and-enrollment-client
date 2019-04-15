@@ -15,6 +15,7 @@ import lombok.SneakyThrows;
 import org.apache.commons.io.FilenameUtils;
 
 public class ConnectionProvider {
+
   private final URL enpointUrl;
 
   private final String truststorePath;
