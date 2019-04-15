@@ -9,16 +9,13 @@ import javax.xml.soap.SOAPMessage;
 import javax.xml.soap.SOAPPart;
 import lombok.Builder;
 import lombok.SneakyThrows;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Build a SOAP Message that will be sent as a request to the Eligibility and Enrollment Service.
  */
 @lombok.Value
 @Builder(toBuilder = true)
-@Slf4j
 public class SoapMessageGenerator {
-
   private final String eeUsername;
 
   private final String eePassword;

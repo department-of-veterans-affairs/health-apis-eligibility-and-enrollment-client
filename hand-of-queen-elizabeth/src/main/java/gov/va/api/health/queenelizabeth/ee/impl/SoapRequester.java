@@ -7,31 +7,16 @@ import gov.va.api.health.queenelizabeth.ee.EligibilityInfo;
 import java.net.URL;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
+import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 
-@Component
+@AllArgsConstructor
 public class SoapRequester implements EligibilityInfo {
-
   private final String endpointUrl;
 
   private final String eeTruststorePath;
 
   private final String eeTruststorePassword;
-
-  /** Constructor. */
-  @Autowired
-  @SneakyThrows
-  public SoapRequester(
-      @Value("${ee.endpoint.url}") String endpointUrl,
-      @Value("${ee.truststore.path}") String eeTruststorePath,
-      @Value("${ee.truststore.password}") String eeTruststorePassword) {
-    this.endpointUrl = endpointUrl;
-    this.eeTruststorePath = eeTruststorePath;
-    this.eeTruststorePassword = eeTruststorePassword;
-  }
 
   @Override
   @SneakyThrows
