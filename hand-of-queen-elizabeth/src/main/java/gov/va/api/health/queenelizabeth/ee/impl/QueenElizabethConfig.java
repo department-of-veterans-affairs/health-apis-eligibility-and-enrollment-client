@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class QueenElizabethConfig {
-
   private final String endpointUrl;
 
   private final String eeTrustStorePath;
