@@ -20,7 +20,7 @@ public class QueenElizabethConfig {
   public QueenElizabethConfig(
       @Value("${ee.endpoint.url}") String endpointUrl,
       @Value("${ee.truststore.path}") String eeTrustStorePath,
-      @Value("$ee.truststore.password}") String eeTrustStorePassword) {
+      @Value("${ee.truststore.password}") String eeTrustStorePassword) {
     this.endpointUrl = endpointUrl;
     this.eeTrustStorePath = eeTrustStorePath;
     this.eeTrustStorePassword = eeTrustStorePassword;
