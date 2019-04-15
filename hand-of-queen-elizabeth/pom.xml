@@ -8,7 +8,7 @@
     <relativePath/>
   </parent>
   <artifactId>hand-of-queen-elizabeth</artifactId>
-  <version>1.1.34</version>
+  <version>1.1.35-SNAPSHOT</version>
   <packaging>jar</packaging>
   <properties>
     <jacoco.coverage>0.85</jacoco.coverage>
