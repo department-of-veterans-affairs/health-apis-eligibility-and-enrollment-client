@@ -4,6 +4,7 @@ import gov.va.api.health.queenelizabeth.ee.Eligibilities;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import javax.net.ssl.HttpsURLConnection;
@@ -75,7 +76,12 @@ public class ConnectionProvider {
       throw new Eligibilities.RequestFailed("E&E Url received is not https.");
     }
     String urlHost = enpointUrl.getHost();
-    InetAddress inetAddress = InetAddress.getByName(urlHost);
+    InetAddress inetAddress;
+    try {
+      inetAddress = InetAddress.getByName(urlHost);
+    } catch (UnknownHostException e) {
+      throw new Eligibilities.RequestFailed("Unknown Host");
+    }
     if (inetAddress.isAnyLocalAddress()
         || inetAddress.isLoopbackAddress()
         || inetAddress.isLinkLocalAddress()) {
