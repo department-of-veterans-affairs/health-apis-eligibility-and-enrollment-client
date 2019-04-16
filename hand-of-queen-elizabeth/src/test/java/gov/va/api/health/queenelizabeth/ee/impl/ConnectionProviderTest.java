@@ -27,10 +27,18 @@ public class ConnectionProviderTest {
   @Test(expected = Eligibilities.RequestFailed.class)
   @SneakyThrows
   public void localhostGetsRequestFailed() {
-    // URL url = Mockito.spy(new URL("http://ee.va.gov:9334/getEESummary/"));
     ConnectionProvider connectionProvider =
         new ConnectionProvider(
             new URL("https://localhost:9334/getEESummary/"), "test-truststore.jks", "secret");
+    connectionProvider.getConnection();
+  }
+
+  @Test(expected = Eligibilities.RequestFailed.class)
+  @SneakyThrows
+  public void unknownHostGetsRequestFailed() {
+    ConnectionProvider connectionProvider =
+        new ConnectionProvider(
+            new URL("https://ee.va.gov:9334/getEESummary/"), "test-truststore.jks", "secret");
     connectionProvider.getConnection();
   }
 }
