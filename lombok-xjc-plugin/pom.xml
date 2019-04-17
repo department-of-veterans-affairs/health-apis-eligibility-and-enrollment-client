@@ -10,6 +10,7 @@
   <artifactId>lombok-xjc-plugin</artifactId>
   <version>1.1.36-SNAPSHOT</version>
   <properties>
+    <jaxb-xjc.version>2.3.2</jaxb-xjc.version>
     <lombok.version>1.18.6</lombok.version>
     <lombok-annotations.includes>lombok/AccessLevel.java,lombok/*ArgsConstructor.java,lombok/Builder.java,lombok/Data.java,lombok/Getter.java,lombok/Setter.java,lombok/Equals*.java, lombok/ToString.java</lombok-annotations.includes>
   </properties>
@@ -17,7 +18,7 @@
     <dependency>
       <groupId>com.sun.xml.bind</groupId>
       <artifactId>jaxb-xjc</artifactId>
-      <version>2.3.2</version>
+      <version>${jaxb-xjc.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
