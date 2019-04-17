@@ -5,13 +5,22 @@
     <groupId>gov.va.api.health</groupId>
     <artifactId>health-apis-parent</artifactId>
     <version>2.0.0</version>
+    <relativePath/>
   </parent>
   <artifactId>ee-artifacts</artifactId>
   <version>1.1.35-SNAPSHOT</version>
   <packaging>jar</packaging>
   <properties>
-    <skip.checkstyle>true</skip.checkstyle>
+    <checkstyle.skip>true</checkstyle.skip>
   </properties>
+  <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>1.18.6</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
   <build>
     <plugins>
       <plugin>
@@ -30,18 +39,22 @@
               </wsdlFiles>
               <keep>true</keep>
               <sourceDestDir>src/main/java</sourceDestDir>
+              <args>
+                <arg>-B-Xlombok</arg>
+              </args>
               <vmArgs>
                 <vmArg>-Djavax.xml.accessExternalSchema=all</vmArg>
               </vmArgs>
             </configuration>
           </execution>
         </executions>
-      </plugin>
-      <plugin>
-        <artifactId>maven-checkstyle-plugin</artifactId>
-        <configuration>
-          <skip>${skip.checkstyle}</skip>
-        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>gov.va.api.health</groupId>
+            <artifactId>lombok-xjc-plugin</artifactId>
+            <version>0.1.0-SNAPSHOT</version>
+          </dependency>
+        </dependencies>
       </plugin>
     </plugins>
   </build>
