@@ -10,6 +10,7 @@
   <version>1.1.35-SNAPSHOT</version>
   <packaging>pom</packaging>
   <modules>
+    <module>lombok-xjc-plugin</module>
     <module>ee-artifacts</module>
     <module>hand-of-queen-elizabeth</module>
     <module>queen-elizabeth</module>
