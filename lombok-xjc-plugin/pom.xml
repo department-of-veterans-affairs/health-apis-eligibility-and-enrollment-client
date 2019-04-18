@@ -10,9 +10,10 @@
   <artifactId>lombok-xjc-plugin</artifactId>
   <version>1.1.36-SNAPSHOT</version>
   <properties>
+    <build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
     <jaxb-xjc.version>2.3.2</jaxb-xjc.version>
     <lombok.version>1.18.6</lombok.version>
-    <lombok-annotations.includes>lombok/AccessLevel.java,lombok/*ArgsConstructor.java,lombok/Builder.java,lombok/Data.java,lombok/Getter.java,lombok/Setter.java,lombok/Equals*.java, lombok/ToString.java</lombok-annotations.includes>
+    <maven-dependency-plugin>3.1.1</maven-dependency-plugin>
   </properties>
   <dependencies>
     <dependency>
@@ -32,7 +33,7 @@
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
-        <version>3.1.1</version>
+        <version>${maven-dependency-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -48,10 +49,10 @@
                   <type>jar</type>
                   <classifier>sources</classifier>
                   <overWrite>true</overWrite>
-                  <outputDirectory>${project.build.directory}/generated-sources/lombok</outputDirectory>
+                  <outputDirectory>${project.build.directory}/main/java</outputDirectory>
                 </artifactItem>
               </artifactItems>
-              <includes>${lombok-annotations.includes}</includes>
+              <includes>lombok/AccessLevel.java, lombok/AllArgsConstructor.java, lombok/Builder.java, lombok/Data.java, lombok/EqualsAndHashCode.java, lombok/Getter.java, lombok/NoArgsConstructor.java, lombok/Setter.java, lombok/ToString.java</includes>
             </configuration>
           </execution>
         </executions>
@@ -59,7 +60,7 @@
       <plugin>
         <groupId>org.codehaus.mojo</groupId>
         <artifactId>build-helper-maven-plugin</artifactId>
-        <version>3.0.0</version>
+        <version>${build-helper-maven-plugin.version}</version>
         <executions>
           <execution>
             <phase>generate-sources</phase>
@@ -68,7 +69,7 @@
             </goals>
             <configuration>
               <sources>
-                <source>${project.build.directory}/generated-sources/lombok</source>
+                <source>${project.build.directory}/main/java</source>
               </sources>
             </configuration>
           </execution>
