@@ -40,10 +40,4 @@ public interface Eligibilities {
       super(" Reason: " + message);
     }
   }
-
-  class UnknownIdentityInSearchParameter extends EligibilitiesException {
-    public UnknownIdentityInSearchParameter(SoapMessageGenerator soapMessageGenerator) {
-      super(soapMessageGenerator.createGetEeSummarySoapRequest().toString());
-    }
-  }
 }

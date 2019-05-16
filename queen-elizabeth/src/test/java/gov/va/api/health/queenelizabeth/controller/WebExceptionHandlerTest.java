@@ -56,9 +56,6 @@ public class WebExceptionHandlerTest {
             .id("1010101010V666666")
             .build();
     return Arrays.asList(
-        test(
-            HttpStatus.NOT_FOUND,
-            new Eligibilities.UnknownIdentityInSearchParameter(soapMessageGenerator)),
         test(HttpStatus.BAD_REQUEST, new Eligibilities.MissingIcnValue(soapMessageGenerator)),
         test(
             HttpStatus.BAD_REQUEST,

@@ -38,17 +38,6 @@ public class ValidateEligibilitiesTest {
             .build());
   }
 
-  @Test(expected = Eligibilities.UnknownIdentityInSearchParameter.class)
-  public void invalidIcnIdShouldReturnUnknownIdentityException() {
-    validateEligibilities.request(
-        SoapMessageGenerator.builder()
-            .eeUsername("eeTestUsername")
-            .eePassword("eeTestPassword")
-            .eeRequestName("eeTestRequestName")
-            .id("not-an-icn")
-            .build());
-  }
-
   @Test(expected = Eligibilities.RequestFailed.class)
   public void requestFailedForFailedParse() {
     Mockito.doReturn("<not-valid-xml>")
