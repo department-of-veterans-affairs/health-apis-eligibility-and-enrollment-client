@@ -38,7 +38,6 @@ public class ValidateEligibilitiesTest {
             .build());
   }
 
-
   @Test(expected = Eligibilities.RequestFailed.class)
   public void requestFailedForFailedParse() {
     Mockito.doReturn("<not-valid-xml>")
