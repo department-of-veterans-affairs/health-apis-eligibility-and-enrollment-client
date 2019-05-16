@@ -4,11 +4,11 @@
   <parent>
     <groupId>gov.va.api.health</groupId>
     <artifactId>health-apis-parent</artifactId>
-    <version>2.0.2</version>
+    <version>2.0.3</version>
     <relativePath/>
   </parent>
   <artifactId>ee-artifacts</artifactId>
-  <version>1.1.37-SNAPSHOT</version>
+  <version>1.1.37</version>
   <packaging>jar</packaging>
   <properties>
     <checkstyle.skip>true</checkstyle.skip>
