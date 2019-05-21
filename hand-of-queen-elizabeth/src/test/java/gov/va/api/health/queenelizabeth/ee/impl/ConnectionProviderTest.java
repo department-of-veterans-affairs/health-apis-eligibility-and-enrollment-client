@@ -31,7 +31,7 @@ public class ConnectionProviderTest {
   public void unknownHostGetsRequestFailedForHttp() {
     ConnectionProvider connectionProvider =
         new ConnectionProvider(
-            new URL("http://ee.va.gov:9334/getEESummary/"), "test-truststore.jks", "secret");
+            new URL("http://ee.va.gov:9334/getEESummary/"), null, null);
     connectionProvider.getConnection();
   }
 
