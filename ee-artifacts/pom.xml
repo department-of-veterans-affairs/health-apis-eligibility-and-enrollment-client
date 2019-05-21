@@ -50,9 +50,9 @@
         </executions>
         <dependencies>
           <dependency>
-            <groupId>gov.va.api.health</groupId>
+            <groupId>gov.va.xjc</groupId>
             <artifactId>lombok-xjc-plugin</artifactId>
-            <version>${project.version}</version>
+            <version>1.2.0</version>
           </dependency>
         </dependencies>
       </plugin>
