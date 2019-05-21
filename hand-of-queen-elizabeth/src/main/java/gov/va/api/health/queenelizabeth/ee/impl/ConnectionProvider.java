@@ -26,8 +26,6 @@ public class ConnectionProvider {
 
   SOAPConnection soapConnection;
 
-  HttpsURLConnection httpsUrlConnection;
-
   HttpURLConnection httpUrlConnection;
 
   /** Constructor. */
@@ -41,11 +39,7 @@ public class ConnectionProvider {
   @SneakyThrows
   public void disconnect() {
     soapConnection.close();
-    if (endpointUrl.getProtocol().equals("http")) {
-      httpUrlConnection.disconnect();
-    } else {
-      httpsUrlConnection.disconnect();
-    }
+    httpUrlConnection.disconnect();
   }
 
   /** Get HTTPS Connection to EE. */
@@ -59,7 +53,7 @@ public class ConnectionProvider {
     if (endpointUrl.getProtocol().equals("http")) {
       httpUrlConnection = openHttpConnection();
     } else {
-      httpsUrlConnection = openHttpsConnection();
+      httpUrlConnection = openHttpsConnection();
     }
     SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
     soapConnection = soapConnectionFactory.createConnection();
