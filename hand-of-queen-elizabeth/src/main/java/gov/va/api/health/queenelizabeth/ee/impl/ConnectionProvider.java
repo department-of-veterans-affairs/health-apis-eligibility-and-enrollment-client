@@ -26,7 +26,7 @@ public class ConnectionProvider {
 
   SOAPConnection soapConnection;
 
-  HttpURLConnection httpUrlConnection;
+  HttpURLConnection urlConnection;
 
   /** Constructor. */
   public ConnectionProvider(URL endpointUrl, String truststorePath, String truststorePassword) {
@@ -39,7 +39,7 @@ public class ConnectionProvider {
   @SneakyThrows
   public void disconnect() {
     soapConnection.close();
-    httpUrlConnection.disconnect();
+    urlConnection.disconnect();
   }
 
   /** Get HTTPS Connection to EE. */
@@ -51,9 +51,13 @@ public class ConnectionProvider {
       throw new Eligibilities.RequestFailed("Unknown Host");
     }
     if (endpointUrl.getProtocol().equals("http")) {
-      httpUrlConnection = openHttpConnection();
+      urlConnection = (HttpURLConnection) endpointUrl.openConnection();
+      urlConnection.connect();
+
     } else {
-      httpUrlConnection = openHttpsConnection();
+      HttpsURLConnection.setDefaultSSLSocketFactory(getSslContext().getSocketFactory());
+      urlConnection = (HttpsURLConnection) endpointUrl.openConnection();
+      urlConnection.connect();
     }
     SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
     soapConnection = soapConnectionFactory.createConnection();
@@ -75,22 +79,5 @@ public class ConnectionProvider {
     sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
     truststoreInputStream.close();
     return sslContext;
-  }
-
-  @SneakyThrows
-  private HttpURLConnection openHttpConnection() {
-    /* HTTP connection with the MOCK-EE service. */
-    HttpURLConnection httpUrlConnection = (HttpURLConnection) endpointUrl.openConnection();
-    httpUrlConnection.connect();
-    return httpUrlConnection;
-  }
-
-  @SneakyThrows
-  private HttpsURLConnection openHttpsConnection() {
-    /* HTTPS connection with the EE service. */
-    HttpsURLConnection.setDefaultSSLSocketFactory(getSslContext().getSocketFactory());
-    HttpsURLConnection httpsUrlConnection = (HttpsURLConnection) endpointUrl.openConnection();
-    httpsUrlConnection.connect();
-    return httpsUrlConnection;
   }
 }
