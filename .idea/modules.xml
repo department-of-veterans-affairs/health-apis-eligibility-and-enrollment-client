@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<project version="4">
-  <component name="ProjectModuleManager">
-    <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/health-apis-enrollment-and-eligibility-client.iml" filepath="$PROJECT_DIR$/.idea/health-apis-enrollment-and-eligibility-client.iml" />
-      <module fileurl="file://$PROJECT_DIR$/queen-elizabeth/queen-elizabeth.iml" filepath="$PROJECT_DIR$/queen-elizabeth/queen-elizabeth.iml" />
-    </modules>
-  </component>
-</project>
