@@ -1,5 +1,7 @@
 package gov.va.api.health.queenelizabeth.ee.impl;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import gov.va.api.health.queenelizabeth.ee.Eligibilities;
 import java.net.URL;
 import lombok.SneakyThrows;
@@ -15,27 +17,27 @@ public class ConnectionProviderTest {
     MockitoAnnotations.initMocks(this);
   }
 
-  @Test(expected = Eligibilities.RequestFailed.class)
+  @Test
   @SneakyThrows
-  public void badUrlProtocolGetsRequestFailed() {
-    ConnectionProvider connectionProvider =
-        new ConnectionProvider(
-            new URL("http://ee.va.gov:9334/getEESummary/"), "test-truststore.jks", "secret");
-    connectionProvider.getConnection();
-  }
-
-  @Test(expected = Eligibilities.RequestFailed.class)
-  @SneakyThrows
-  public void localhostGetsRequestFailed() {
+  public void httpsSslContextSetToTls() {
     ConnectionProvider connectionProvider =
         new ConnectionProvider(
             new URL("https://localhost:9334/getEESummary/"), "test-truststore.jks", "secret");
+    assertThat(connectionProvider.getSslContext().getProtocol()).isEqualTo("TLS");
+  }
+
+  @Test(expected = Eligibilities.RequestFailed.class)
+  @SneakyThrows
+  public void unknownHostGetsRequestFailedForHttp() {
+    ConnectionProvider connectionProvider =
+        new ConnectionProvider(
+            new URL("http://ee.va.gov:9334/getEESummary/"), null, null);
     connectionProvider.getConnection();
   }
 
   @Test(expected = Eligibilities.RequestFailed.class)
   @SneakyThrows
-  public void unknownHostGetsRequestFailed() {
+  public void unknownHostGetsRequestFailedForHttps() {
     ConnectionProvider connectionProvider =
         new ConnectionProvider(
             new URL("https://ee.va.gov:9334/getEESummary/"), "test-truststore.jks", "secret");

@@ -2,6 +2,7 @@ package gov.va.api.health.queenelizabeth.ee.impl;
 
 import gov.va.api.health.queenelizabeth.ee.Eligibilities;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.URL;
 import java.net.UnknownHostException;
@@ -17,7 +18,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public class ConnectionProvider {
 
-  private final URL enpointUrl;
+  private final URL endpointUrl;
 
   private final String truststorePath;
 
@@ -25,33 +26,46 @@ public class ConnectionProvider {
 
   SOAPConnection soapConnection;
 
-  HttpsURLConnection httpsUrlConnection;
+  HttpURLConnection urlConnection;
 
   /** Constructor. */
   public ConnectionProvider(URL endpointUrl, String truststorePath, String truststorePassword) {
-    this.enpointUrl = endpointUrl;
+    this.endpointUrl = endpointUrl;
     this.truststorePath = truststorePath;
     this.truststorePassword = truststorePassword;
   }
 
+  /** Disconnect. */
   @SneakyThrows
   public void disconnect() {
     soapConnection.close();
-    httpsUrlConnection.disconnect();
+    urlConnection.disconnect();
   }
 
   /** Get HTTPS Connection to EE. */
   @SneakyThrows
   public SOAPConnection getConnection() {
-    /* In E&E we trust. */
-    httpsUrlConnection = openHttpsConnection();
+    try {
+      InetAddress.getByName(endpointUrl.getHost());
+    } catch (UnknownHostException e) {
+      throw new Eligibilities.RequestFailed("Unknown Host");
+    }
+    if (endpointUrl.getProtocol().equals("http")) {
+      urlConnection = (HttpURLConnection) endpointUrl.openConnection();
+      urlConnection.connect();
+
+    } else {
+      HttpsURLConnection.setDefaultSSLSocketFactory(getSslContext().getSocketFactory());
+      urlConnection = (HttpsURLConnection) endpointUrl.openConnection();
+      urlConnection.connect();
+    }
     SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
     soapConnection = soapConnectionFactory.createConnection();
     return soapConnection;
   }
 
   @SneakyThrows
-  private SSLContext getSslContext() {
+  SSLContext getSslContext() {
     /* Load the truststore that contains the ee certs. */
     InputStream truststoreInputStream =
         getClass().getClassLoader().getResourceAsStream(FilenameUtils.getName(truststorePath));
@@ -65,30 +79,5 @@ public class ConnectionProvider {
     sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
     truststoreInputStream.close();
     return sslContext;
-  }
-
-  @SneakyThrows
-  private HttpsURLConnection openHttpsConnection() {
-    /* HTTPS connection with the EE service. */
-    HttpsURLConnection.setDefaultSSLSocketFactory(getSslContext().getSocketFactory());
-    String urlProtocol = enpointUrl.getProtocol();
-    if (!urlProtocol.equals("https")) {
-      throw new Eligibilities.RequestFailed("E&E Url received is not https.");
-    }
-    String urlHost = enpointUrl.getHost();
-    InetAddress inetAddress;
-    try {
-      inetAddress = InetAddress.getByName(urlHost);
-    } catch (UnknownHostException e) {
-      throw new Eligibilities.RequestFailed("Unknown Host");
-    }
-    if (inetAddress.isAnyLocalAddress()
-        || inetAddress.isLoopbackAddress()
-        || inetAddress.isLinkLocalAddress()) {
-      throw new Eligibilities.RequestFailed("E&E Url received is a local address.");
-    }
-    HttpsURLConnection httpsUrlConnection = (HttpsURLConnection) enpointUrl.openConnection();
-    httpsUrlConnection.connect();
-    return httpsUrlConnection;
   }
 }
