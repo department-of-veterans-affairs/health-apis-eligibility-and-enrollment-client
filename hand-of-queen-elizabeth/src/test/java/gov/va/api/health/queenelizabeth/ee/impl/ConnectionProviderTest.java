@@ -30,8 +30,7 @@ public class ConnectionProviderTest {
   @SneakyThrows
   public void unknownHostGetsRequestFailedForHttp() {
     ConnectionProvider connectionProvider =
-        new ConnectionProvider(
-            new URL("http://ee.va.gov:9334/getEESummary/"), null, null);
+        new ConnectionProvider(new URL("http://ee.va.gov:9334/getEESummary/"), null, null);
     connectionProvider.getConnection();
   }
 
