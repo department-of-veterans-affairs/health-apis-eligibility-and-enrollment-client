@@ -6,6 +6,7 @@ import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathExpressionException;
 import javax.xml.xpath.XPathFactory;
 import lombok.Builder;
+import org.apache.commons.lang3.StringUtils;
 import org.w3c.dom.Document;
 
 public class XmlResponseValidator {
@@ -18,9 +19,18 @@ public class XmlResponseValidator {
     this.response = response;
   }
 
-  private String extractSummaryField() {
-    XPath xpath = XPathFactory.newInstance().newXPath();
+  private String extractFaultString() {
     try {
+      XPath xpath = XPathFactory.newInstance().newXPath();
+      return xpath.compile("/Fault/faultstring").evaluate(response);
+    } catch (XPathExpressionException e) {
+      throw new Eligibilities.RequestFailed(soapMessageGenerator, "Don't Understand XML.");
+    }
+  }
+
+  private String extractSummaryField() {
+    try {
+      XPath xpath = XPathFactory.newInstance().newXPath();
       return xpath.compile("/getEESummaryResponse").evaluate(response);
     } catch (XPathExpressionException e) {
       throw new Eligibilities.RequestFailed(soapMessageGenerator, "Don't Understand XML.");
@@ -29,9 +39,16 @@ public class XmlResponseValidator {
 
   void validate() {
     String summary = extractSummaryField();
-    if (summary.isEmpty()) {
-      throw new Eligibilities.RequestFailed(
-          soapMessageGenerator, "Don't Understand XML, getEESummaryResponse is Missing");
+    if (!summary.isEmpty()) {
+      return;
     }
+
+    String faultString = extractFaultString();
+    if (StringUtils.isNotBlank(faultString)) {
+      throw new Eligibilities.RequestFailed(soapMessageGenerator, faultString);
+    }
+
+    throw new Eligibilities.RequestFailed(
+        soapMessageGenerator, "Don't Understand XML, getEESummaryResponse is Missing");
   }
 }
