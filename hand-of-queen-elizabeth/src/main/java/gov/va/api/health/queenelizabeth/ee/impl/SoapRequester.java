@@ -28,14 +28,19 @@ public class SoapRequester implements EligibilityInfo {
     return response;
   }
 
-  /** Sends the SOAP Request and retreives the Body of the SOAP Response. */
+  /** Sends the SOAP Request and retrieves the Body of the SOAP Response. */
   public String getSoapResponseBody(
       SOAPMessage soapRequestMessage, ConnectionProvider connectionProvider) {
     try {
       /* Lets get us a SOAP Response. */
       SOAPMessage soapResponse =
           connectionProvider.getConnection().call(soapRequestMessage, endpointUrl);
-      return getSoapBodyAsString(soapResponse);
+      String body = getSoapBodyAsString(soapResponse);
+      if (body.contains("java.lang.ClassNotFoundException")) {
+        throw new Eligibilities.RequestFailed("Failed to send/receive from EE");
+      } else {
+        return body;
+      }
     } catch (SOAPException e) {
       throw new Eligibilities.RequestFailed(soapRequestMessage, "Failed to send/receive from EE");
     }
