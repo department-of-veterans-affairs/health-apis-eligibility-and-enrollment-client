@@ -22,6 +22,13 @@ public interface Eligibilities {
     }
   }
 
+  class PersonNotFound extends EligibilitiesException {
+    public PersonNotFound(SoapMessageGenerator soapMessageGenerator, String message) {
+      super(
+          soapMessageGenerator.createGetEeSummarySoapRequest().toString() + " Reason: " + message);
+    }
+  }
+
   class RequestFailed extends EligibilitiesException {
     public RequestFailed(SoapMessageGenerator soapMessageGenerator, Exception cause) {
       super(soapMessageGenerator.createGetEeSummarySoapRequest().toString(), cause);
@@ -29,15 +36,15 @@ public interface Eligibilities {
 
     public RequestFailed(SoapMessageGenerator soapMessageGenerator, String message) {
       super(
-          soapMessageGenerator.createGetEeSummarySoapRequest().toString() + " Reason: " + message);
+          soapMessageGenerator.createGetEeSummarySoapRequest().toString() + " Reason1: " + message);
     }
 
     public RequestFailed(SOAPMessage soapRequestMessage, String message) {
-      super(soapRequestMessage.toString() + " Reason: " + message);
+      super(soapRequestMessage.toString() + " Reason2: " + message);
     }
 
     public RequestFailed(String message) {
-      super(" Reason: " + message);
+      super(" Reason3: " + message);
     }
   }
 }

@@ -45,6 +45,9 @@ public class XmlResponseValidator {
 
     String faultString = extractFaultString();
     if (StringUtils.isNotBlank(faultString)) {
+      if (faultString.equals("PERSON_NOT_FOUND")) {
+        throw new Eligibilities.PersonNotFound(soapMessageGenerator, faultString);
+      }
       throw new Eligibilities.RequestFailed(soapMessageGenerator, faultString);
     }
 
