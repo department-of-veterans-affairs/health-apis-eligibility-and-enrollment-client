@@ -63,7 +63,10 @@ public class WebExceptionHandlerTest {
         test(
             HttpStatus.INTERNAL_SERVER_ERROR,
             new Eligibilities.RequestFailed(soapMessageGenerator, "")),
-        test(HttpStatus.INTERNAL_SERVER_ERROR, new RuntimeException()));
+        test(HttpStatus.INTERNAL_SERVER_ERROR, new RuntimeException()),
+        test(
+            HttpStatus.NOT_FOUND,
+            new Eligibilities.PersonNotFound(soapMessageGenerator, "PERSON_NOT_FOUND")));
   }
 
   private static Object[] test(HttpStatus status, Exception exception) {
