@@ -28,7 +28,6 @@ public class ValidateEligibilities implements Eligibilities {
   @SneakyThrows
   public String request(final SoapMessageGenerator originalSoapMessage) {
     /* TODO Swap ICN for a Public ID of some kind */
-    log.info("Request {} ", originalSoapMessage);
     validate(originalSoapMessage);
     String originalXml =
         eligibilityInfo.executeSoapCall(originalSoapMessage.createGetEeSummarySoapRequest());
