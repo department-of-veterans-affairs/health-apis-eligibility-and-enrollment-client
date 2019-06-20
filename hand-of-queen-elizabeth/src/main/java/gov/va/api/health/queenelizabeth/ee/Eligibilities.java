@@ -36,15 +36,15 @@ public interface Eligibilities {
 
     public RequestFailed(SoapMessageGenerator soapMessageGenerator, String message) {
       super(
-          soapMessageGenerator.createGetEeSummarySoapRequest().toString() + " Reason1: " + message);
+          soapMessageGenerator.createGetEeSummarySoapRequest().toString() + " Reason: " + message);
     }
 
     public RequestFailed(SOAPMessage soapRequestMessage, String message) {
-      super(soapRequestMessage.toString() + " Reason2: " + message);
+      super(soapRequestMessage.toString() + " Reason: " + message);
     }
 
     public RequestFailed(String message) {
-      super(" Reason3: " + message);
+      super(" Reason: " + message);
     }
   }
 }
