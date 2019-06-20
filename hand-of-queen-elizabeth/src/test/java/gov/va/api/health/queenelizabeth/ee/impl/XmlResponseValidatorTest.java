@@ -7,8 +7,6 @@ import gov.va.api.health.queenelizabeth.util.XmlDocuments;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.soap.MessageFactory;
 import javax.xml.soap.SOAPException;
 import javax.xml.soap.SOAPMessage;
@@ -56,22 +54,8 @@ public class XmlResponseValidatorTest {
   }
 
   @Test(expected = Eligibilities.PersonNotFound.class)
-  public void requestPersonNotFound() throws Exception {
-    DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
-    DocumentBuilder documentBuilder = documentBuilderFactory.newDocumentBuilder();
-    Document response = documentBuilder.newDocument();
-    Element fault = response.createElement("Fault");
-    response.appendChild(fault);
-    Element faultString = response.createElement("faultstring");
-    Text personNotFound = response.createTextNode("PERSON_NOT_FOUND");
-    faultString.appendChild(personNotFound);
-    fault.appendChild(faultString);
-    XmlResponseValidator xmlResponseValidator =
-        XmlResponseValidator.builder()
-            .soapMessageGenerator(soapMessageGenerator())
-            .response(response)
-            .build();
-    xmlResponseValidator.validate();
+  public void requestPersonNotFound() {
+    parse(Samples.create().personNotFound());
   }
 
   private SoapMessageGenerator soapMessageGenerator() {
