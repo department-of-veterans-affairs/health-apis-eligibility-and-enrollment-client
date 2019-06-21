@@ -23,6 +23,10 @@ public class Samples {
     return read("getEeSummaryResponseBody.xml");
   }
 
+  public String personNotFound() {
+    return read("personNotFound.xml");
+  }
+
   @SneakyThrows
   private String read(String fileName) {
     InputStream stream = getClass().getResourceAsStream("/samples/" + fileName);

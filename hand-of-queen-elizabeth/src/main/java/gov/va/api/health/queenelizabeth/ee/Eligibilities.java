@@ -22,6 +22,13 @@ public interface Eligibilities {
     }
   }
 
+  class PersonNotFound extends EligibilitiesException {
+    public PersonNotFound(SoapMessageGenerator soapMessageGenerator, String message) {
+      super(
+          soapMessageGenerator.createGetEeSummarySoapRequest().toString() + " Reason: " + message);
+    }
+  }
+
   class RequestFailed extends EligibilitiesException {
     public RequestFailed(SoapMessageGenerator soapMessageGenerator, Exception cause) {
       super(soapMessageGenerator.createGetEeSummarySoapRequest().toString(), cause);

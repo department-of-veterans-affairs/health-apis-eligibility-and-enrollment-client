@@ -53,6 +53,11 @@ public class XmlResponseValidatorTest {
     parse(Samples.create().eeFault());
   }
 
+  @Test(expected = Eligibilities.PersonNotFound.class)
+  public void requestPersonNotFound() {
+    parse(Samples.create().personNotFound());
+  }
+
   private SoapMessageGenerator soapMessageGenerator() {
     return SoapMessageGenerator.builder()
         .eeUsername("eeTestUsername")

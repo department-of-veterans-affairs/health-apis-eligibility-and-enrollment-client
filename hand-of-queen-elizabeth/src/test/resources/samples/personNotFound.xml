@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<env:Envelope xmlns:env="http://schemas.xmlsoap.org/soap/envelope/">
+  <env:Header/>
+  <env:Body>
+    <Fault>
+      <faultcode>env:Client</faultcode>
+      <faultstring>PERSON_NOT_FOUND</faultstring>
+      <detail>
+        <detail>Unable to invoke SOA ESR due to: Unable to invoke service with EntityFinder arg: HealthAPISvcUsr:CommunityCareInfo due to exception message: Invalid VPID and root cause stack trace: gov.va.med.person.idmgmt.exceptions.VPIDException: Invalid VPID checkdigit: 123456</detail>
+      </detail>
+    </Fault>
+  </env:Body>
+</env:Envelope>
