@@ -51,12 +51,14 @@ public final class XmlDocuments {
   /** Get the body of a SOAP Message as a string value. */
   public static String getSoapBodyAsString(SOAPMessage soapMessage) {
     try {
-      SOAPBody soapBody = soapMessage.getSOAPBody();
-      Node element = (Node) soapBody.getChildElements().next();
-      StringWriter stringResult = new StringWriter();
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
       transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
+      transformerFactory.setFeature(
+          "http://javax.xml.XMLConstants/feature/secure-processing", true);
+      SOAPBody soapBody = soapMessage.getSOAPBody();
+      Node element = (Node) soapBody.getChildElements().next();
+      StringWriter stringResult = new StringWriter();
       transformerFactory
           .newTransformer()
           .transform(new DOMSource(element), new StreamResult(stringResult));
@@ -86,6 +88,8 @@ public final class XmlDocuments {
       factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
       factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
       factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+      factory.setValidating(true);
+
       DocumentBuilder builder = factory.newDocumentBuilder();
       InputSource is = new InputSource(new StringReader(xml));
       return builder.parse(is);
