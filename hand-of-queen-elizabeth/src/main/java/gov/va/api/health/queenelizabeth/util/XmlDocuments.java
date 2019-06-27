@@ -54,8 +54,7 @@ public final class XmlDocuments {
       TransformerFactory transformerFactory = TransformerFactory.newInstance();
       transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_DTD, "");
       transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
-      transformerFactory.setFeature(
-          "http://javax.xml.XMLConstants/feature/secure-processing", true);
+      transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
       SOAPBody soapBody = soapMessage.getSOAPBody();
       Node element = (Node) soapBody.getChildElements().next();
       StringWriter stringResult = new StringWriter();
