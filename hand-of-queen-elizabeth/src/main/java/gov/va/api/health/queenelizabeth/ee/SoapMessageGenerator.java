@@ -50,24 +50,21 @@ public class SoapMessageGenerator {
       /* Set the headers of the SOAP Request Message.*/
       SOAPHeader soapHeader = soapEnvelope.getHeader();
       SOAPElement soapHeaderSecurityElement = soapHeader.addChildElement("Security", "wsse");
-      SOAPElement soapHeaderSecurityAttribute =
-          soapHeaderSecurityElement.addAttribute(
-              soapEnvelope.createQName("mustUnderstand", "SOAP-ENV"), "1");
+      soapHeaderSecurityElement.addAttribute(
+          soapEnvelope.createQName("mustUnderstand", "SOAP-ENV"), "1");
       SOAPElement soapHeaderUsernameTokenElement =
           soapHeaderSecurityElement.addChildElement("UsernameToken", "wsse");
-      SOAPElement soapHeaderUsernameTokenAttribute =
-          soapHeaderUsernameTokenElement.addAttribute(
-              soapEnvelope.createQName("Id", "wsu"), "XWSSGID-1281117217796-43574433");
+      soapHeaderUsernameTokenElement.addAttribute(
+          soapEnvelope.createQName("Id", "wsu"), "XWSSGID-1281117217796-43574433");
       SOAPElement soapHeaderUsernameTokenUserElement =
           soapHeaderUsernameTokenElement.addChildElement("Username", "wsse");
       soapHeaderUsernameTokenUserElement.addTextNode(eeUsername);
       SOAPElement soapHeaderUsernameTokenPasswordElement =
           soapHeaderUsernameTokenElement.addChildElement("Password", "wsse");
       soapHeaderUsernameTokenPasswordElement.addTextNode(eePassword);
-      SOAPElement soapHeaderUsernameTokenPasswordAttribute =
-          soapHeaderUsernameTokenPasswordElement.addAttribute(
-              soapEnvelope.createName("Type"),
-              "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText");
+      soapHeaderUsernameTokenPasswordElement.addAttribute(
+          soapEnvelope.createName("Type"),
+          "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-username-token-profile-1.0#PasswordText");
 
       /* Set the body of the SOAP Request Message. */
       SOAPBody soapBody = soapEnvelope.getBody();
