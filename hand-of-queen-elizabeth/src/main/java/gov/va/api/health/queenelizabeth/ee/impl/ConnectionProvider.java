@@ -67,10 +67,8 @@ public class ConnectionProvider {
   @SneakyThrows
   SSLContext getSslContext() {
     /* Load the truststore that contains the ee certs. */
-    InputStream truststoreInputStream = null;
-    try {
-      truststoreInputStream =
-          ConnectionProvider.class.getResourceAsStream(FilenameUtils.getName(truststorePath));
+    try (InputStream truststoreInputStream =
+        ConnectionProvider.class.getResourceAsStream(FilenameUtils.getName(truststorePath))) {
       KeyStore ts = KeyStore.getInstance("JKS");
       ts.load(truststoreInputStream, truststorePassword.toCharArray());
       TrustManagerFactory trustManagerFactory =
@@ -80,10 +78,6 @@ public class ConnectionProvider {
       SSLContext sslContext = SSLContext.getInstance("TLS");
       sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
       return sslContext;
-    } finally {
-      if (truststoreInputStream != null) {
-        truststoreInputStream.close();
-      }
     }
   }
 }
