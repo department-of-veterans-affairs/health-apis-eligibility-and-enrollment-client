@@ -70,7 +70,7 @@ public class ConnectionProvider {
     InputStream truststoreInputStream = null;
     try {
       truststoreInputStream =
-          getClass().getClassLoader().getResourceAsStream(FilenameUtils.getName(truststorePath));
+          ConnectionProvider.class.getResourceAsStream(FilenameUtils.getName(truststorePath));
       KeyStore ts = KeyStore.getInstance("JKS");
       ts.load(truststoreInputStream, truststorePassword.toCharArray());
       TrustManagerFactory trustManagerFactory =
