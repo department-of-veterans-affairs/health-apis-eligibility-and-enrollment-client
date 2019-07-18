@@ -66,9 +66,14 @@ public class ConnectionProvider {
 
   @SneakyThrows
   SSLContext getSslContext() {
+    /* Satisfying Fortify null check */
+    ClassLoader cl = getClass().getClassLoader();
+    if (cl == null) {
+      throw new ClassLoaderException("Something went wrong getting the class loader");
+    }
     /* Load the truststore that contains the ee certs. */
     try (InputStream truststoreInputStream =
-        ConnectionProvider.class.getResourceAsStream(FilenameUtils.getName(truststorePath))) {
+        cl.getResourceAsStream(FilenameUtils.getName(truststorePath))) {
       KeyStore ts = KeyStore.getInstance("JKS");
       ts.load(truststoreInputStream, truststorePassword.toCharArray());
       TrustManagerFactory trustManagerFactory =
@@ -78,6 +83,12 @@ public class ConnectionProvider {
       SSLContext sslContext = SSLContext.getInstance("TLS");
       sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
       return sslContext;
+    }
+  }
+
+  public static class ClassLoaderException extends RuntimeException {
+    ClassLoaderException(String message) {
+      super(message);
     }
   }
 }

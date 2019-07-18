@@ -26,6 +26,11 @@ public class ConnectionProviderTest {
     assertThat(connectionProvider.getSslContext().getProtocol()).isEqualTo("TLS");
   }
 
+  @Test(expected = ConnectionProvider.ClassLoaderException.class)
+  public void throwingClassLoaderException() {
+    throw new ConnectionProvider.ClassLoaderException("This is a test");
+  }
+
   @Test(expected = Eligibilities.RequestFailed.class)
   @SneakyThrows
   public void unknownHostGetsRequestFailedForHttp() {
