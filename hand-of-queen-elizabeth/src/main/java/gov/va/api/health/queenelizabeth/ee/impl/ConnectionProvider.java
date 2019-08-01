@@ -45,11 +45,6 @@ public class ConnectionProvider {
   /** Get HTTPS Connection to EE. */
   @SneakyThrows
   public SOAPConnection getConnection() {
-    try {
-      InetAddress.getByName(endpointUrl.getHost());
-    } catch (UnknownHostException e) {
-      throw new Eligibilities.RequestFailed("Unknown Host");
-    }
     if (endpointUrl.getProtocol().equals("http")) {
       urlConnection = (HttpURLConnection) endpointUrl.openConnection();
       urlConnection.connect();
