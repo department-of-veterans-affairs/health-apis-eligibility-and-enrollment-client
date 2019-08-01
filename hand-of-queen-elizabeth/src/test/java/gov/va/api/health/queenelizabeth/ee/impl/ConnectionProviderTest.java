@@ -2,7 +2,6 @@ package gov.va.api.health.queenelizabeth.ee.impl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import gov.va.api.health.queenelizabeth.ee.Eligibilities;
 import java.net.URL;
 import lombok.SneakyThrows;
 import org.junit.Before;
@@ -29,22 +28,5 @@ public class ConnectionProviderTest {
   @Test(expected = ConnectionProvider.ClassLoaderException.class)
   public void throwingClassLoaderException() {
     throw new ConnectionProvider.ClassLoaderException("This is a test");
-  }
-
-  @Test(expected = Eligibilities.RequestFailed.class)
-  @SneakyThrows
-  public void unknownHostGetsRequestFailedForHttp() {
-    ConnectionProvider connectionProvider =
-        new ConnectionProvider(new URL("http://ee.va.gov:9334/getEESummary/"), null, null);
-    connectionProvider.getConnection();
-  }
-
-  @Test(expected = Eligibilities.RequestFailed.class)
-  @SneakyThrows
-  public void unknownHostGetsRequestFailedForHttps() {
-    ConnectionProvider connectionProvider =
-        new ConnectionProvider(
-            new URL("https://ee.va.gov:9334/getEESummary/"), "test-truststore.jks", "secret");
-    connectionProvider.getConnection();
   }
 }

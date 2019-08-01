@@ -1,11 +1,8 @@
 package gov.va.api.health.queenelizabeth.ee.impl;
 
-import gov.va.api.health.queenelizabeth.ee.Eligibilities;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
-import java.net.InetAddress;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
 import javax.net.ssl.HttpsURLConnection;
@@ -47,13 +44,11 @@ public class ConnectionProvider {
   public SOAPConnection getConnection() {
     if (endpointUrl.getProtocol().equals("http")) {
       urlConnection = (HttpURLConnection) endpointUrl.openConnection();
-      urlConnection.connect();
-
     } else {
       HttpsURLConnection.setDefaultSSLSocketFactory(getSslContext().getSocketFactory());
       urlConnection = (HttpsURLConnection) endpointUrl.openConnection();
-      urlConnection.connect();
     }
+    urlConnection.connect();
     SOAPConnectionFactory soapConnectionFactory = SOAPConnectionFactory.newInstance();
     soapConnection = soapConnectionFactory.createConnection();
     return soapConnection;
