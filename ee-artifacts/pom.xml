@@ -8,7 +8,7 @@
     <relativePath/>
   </parent>
   <artifactId>ee-artifacts</artifactId>
-  <version>1.1.48</version>
+  <version>1.1.49-SNAPSHOT</version>
   <packaging>jar</packaging>
   <properties>
     <checkstyle.skip>true</checkstyle.skip>
