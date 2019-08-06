@@ -34,6 +34,7 @@
       <artifactId>commons-io</artifactId>
       <version>${commons-io.version}</version>
     </dependency>
+    <!-- jaxws-rt runtime dependency added as it is no longer longer provided int he JDK as of Java 11 -->
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>

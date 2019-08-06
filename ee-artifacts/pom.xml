@@ -24,6 +24,7 @@
       <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
+    <!-- jaxws-rt runtime dependency added as it is no longer longer provided int he JDK as of Java 11 -->
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>
@@ -33,6 +34,8 @@
   <build>
     <plugins>
       <plugin>
+        <!-- com.helger.maven is a branch of org.codehaus.mojo jaws-maven-plugin that works with Java 12 -->
+        <!-- https://mvnrepository.com/artifact/com.helger.maven/jaxws-maven-plugin/2.6.2 -->
         <groupId>com.helger.maven</groupId>
         <artifactId>jaxws-maven-plugin</artifactId>
         <version>${jaxws-maven-plugin.version}</version>
