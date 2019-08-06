@@ -12,18 +12,22 @@
   <packaging>jar</packaging>
   <properties>
     <checkstyle.skip>true</checkstyle.skip>
+    <jaxws-maven-plugin.version>2.3.2</jaxws-maven-plugin.version>
+    <jaxws-ri.version>2.3.2</jaxws-ri.version>
+    <lombok-xjc-plugin.version>1.0.1</lombok-xjc-plugin.version>
+    <lombok.version>1.18.8</lombok.version>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.18.8</version>
+      <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-ri</artifactId>
-      <version>2.3.2</version>
+      <version>${jaxws-ri.version}</version>
       <type>pom</type>
     </dependency>
   </dependencies>
@@ -32,7 +36,7 @@
       <plugin>
         <groupId>com.sun.xml.ws</groupId>
         <artifactId>jaxws-maven-plugin</artifactId>
-        <version>2.3.2</version>
+        <version>${jaxws-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -58,7 +62,7 @@
           <dependency>
             <groupId>gov.va.xjc</groupId>
             <artifactId>lombok-xjc-plugin</artifactId>
-            <version>1.0.1</version>
+            <version>${lombok-xjc-plugin.version}</version>
           </dependency>
         </dependencies>
       </plugin>
