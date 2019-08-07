@@ -15,7 +15,7 @@
     <lombok.version>1.18.6</lombok.version>
     <jaxws-rt.version>2.3.2</jaxws-rt.version>
     <jaxws-maven-plugin.version>2.6.2</jaxws-maven-plugin.version>
-    <lombok-xjc-plugin.version>1.0.0</lombok-xjc-plugin.version>
+    <lombok-xjc-plugin.version>1.0.1</lombok-xjc-plugin.version>
   </properties>
   <dependencies>
     <dependency>

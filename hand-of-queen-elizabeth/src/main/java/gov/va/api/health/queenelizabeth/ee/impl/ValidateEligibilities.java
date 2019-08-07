@@ -26,31 +26,21 @@ public class ValidateEligibilities implements Eligibilities {
 
   @Override
   @SneakyThrows
-  public String request(final SoapMessageGenerator originalSoapMessage) {
-    validate(originalSoapMessage);
-    String originalXml =
-        eligibilityInfo.executeSoapCall(originalSoapMessage.createGetEeSummarySoapRequest());
-    Document xml = parse(originalSoapMessage, originalXml);
+  public String request(final SoapMessageGenerator messageGenerator) {
+    validate(messageGenerator);
+    String xml = eligibilityInfo.executeSoapCall(messageGenerator.createGetEeSummarySoapRequest());
+    Document document = parse(messageGenerator, xml);
     XmlResponseValidator.builder()
-        .soapMessageGenerator(originalSoapMessage)
-        .response(xml)
+        .soapMessageGenerator(messageGenerator)
+        .response(document)
         .build()
         .validate();
-    return write(originalSoapMessage, xml);
+    return xml;
   }
 
   private void validate(SoapMessageGenerator soapMessageGenerator) {
     if (soapMessageGenerator.id().isEmpty()) {
       throw new MissingIcnValue(soapMessageGenerator);
-    }
-  }
-
-  private String write(SoapMessageGenerator soapMessageGenerator, Document xml) {
-    try {
-      return XmlDocuments.create().write(xml);
-    } catch (XmlDocuments.WriteFailed e) {
-      log.error("Couldn't write XML: {} ", e.getMessage());
-      throw new RequestFailed(soapMessageGenerator, e);
     }
   }
 }
