@@ -56,7 +56,7 @@ public final class XmlDocuments {
       transformerFactory.setAttribute(XMLConstants.ACCESS_EXTERNAL_STYLESHEET, "");
       transformerFactory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
       SOAPBody soapBody = soapMessage.getSOAPBody();
-      Node element = (Node) soapBody.getChildElements().next();
+      Node element = soapBody.getChildElements().next();
       StringWriter stringResult = new StringWriter();
       transformerFactory
           .newTransformer()
