@@ -29,7 +29,7 @@ public class XmlResponseValidatorTest {
     } catch (SOAPException | IOException e) {
       e.printStackTrace();
     }
-    Document document = XmlDocuments.create().parse(sampleBody);
+    Document document = XmlDocuments.parse(sampleBody);
     XmlResponseValidator xmlResponseValidator =
         XmlResponseValidator.builder()
             .soapMessageGenerator(soapMessageGenerator())

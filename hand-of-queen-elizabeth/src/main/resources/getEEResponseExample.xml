@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<getEESummaryResponse xmlns="http://jaxws.webservices.esr.med.va.gov/schemas">
+  <eesVersion>5.6.0.01001</eesVersion>
+  <summary>
+    <communityCareEligibilityInfo>
+      <eligibilities>
+        <eligibility>
+          <vceDescription>Basic</vceDescription>
+          <vceEffectiveDate>2019-08-16T22:15:58.000-05:00</vceEffectiveDate>
+          <vceCode>B</vceCode>
+        </eligibility>
+      </eligibilities>
+    </communityCareEligibilityInfo>
+    <demographics>
+      <contactInfo>
+        <addresses>
+          <address>
+            <addressTypeCode>Residential</addressTypeCode>
+            <addressChangeDateTime>2003-10-17T10:44:04.000-05:00</addressChangeDateTime>
+            <zipCode>15317</zipCode>
+            <state>PA</state>
+            <country>USA</country>
+            <zipPlus4>5040</zipPlus4>
+            <city>CANONSBURG</city>
+            <county>WASHINGTON</county>
+            <line1>1066 ROYAL DR</line1>
+          </address>
+          <address>
+            <addressTypeCode>Permanent</addressTypeCode>
+            <contactMethodType>08</contactMethodType>
+            <addressChangeDateTime>2003-10-17T10:44:04.000-05:00</addressChangeDateTime>
+            <contactMethodReportDate>2017-10-12T11:09:47.000-05:00</contactMethodReportDate>
+            <zipCode>15317</zipCode>
+            <state>PA</state>
+            <country>USA</country>
+            <zipPlus4>5040</zipPlus4>
+            <city>CANONSBURG</city>
+            <county>WASHINGTON</county>
+            <line1>1066 ROYAL DR</line1>
+          </address>
+        </addresses>
+      </contactInfo>
+    </demographics>
+  </summary>
+  <invocationDate>2019-08-22T07:46:52</invocationDate>
+</getEESummaryResponse>

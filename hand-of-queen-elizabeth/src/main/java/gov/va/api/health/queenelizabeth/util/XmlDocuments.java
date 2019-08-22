@@ -27,8 +27,18 @@ import org.xml.sax.InputSource;
 import org.xml.sax.SAXException;
 
 /** Utilities for working with XML documents. */
-@NoArgsConstructor(staticName = "create")
+@NoArgsConstructor
 public final class XmlDocuments {
+
+  private static DOMImplementationRegistry createRegistryOrDie() {
+    DOMImplementationRegistry registry;
+    try {
+      registry = DOMImplementationRegistry.newInstance();
+    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
+      throw new WriteFailed(e);
+    }
+    return registry;
+  }
 
   /**
    * Finds a DOM implementation is capable of 'Load/Save' operations, which gives us the ability to
@@ -67,28 +77,17 @@ public final class XmlDocuments {
     }
   }
 
-  private DOMImplementationRegistry createRegistryOrDie() {
-    DOMImplementationRegistry registry;
-    try {
-      registry = DOMImplementationRegistry.newInstance();
-    } catch (ClassNotFoundException | IllegalAccessException | InstantiationException e) {
-      throw new WriteFailed(e);
-    }
-    return registry;
-  }
-
   /**
    * Parse the given XML into a Document model. A ParseFailed exception can be thrown if the
    * document cannot be read for any reason.
    */
-  public Document parse(String xml) {
+  public static Document parse(String xml) {
     try {
       DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
       factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
       factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
       factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
       factory.setValidating(true);
-
       DocumentBuilder builder = factory.newDocumentBuilder();
       InputSource is = new InputSource(new StringReader(xml));
       return builder.parse(is);
@@ -101,7 +100,7 @@ public final class XmlDocuments {
    * Write the given Document as an indented XML string. A WriteFailed exception will be thrown if
    * the document cannot be written for some reason.
    */
-  public String write(Document document) {
+  public static String write(Document document) {
     DOMImplementationRegistry registry = createRegistryOrDie();
     DOMImplementationLS domImplementation = findLsDomImplementationOrDie(registry);
     Writer stringWriter = new StringWriter();

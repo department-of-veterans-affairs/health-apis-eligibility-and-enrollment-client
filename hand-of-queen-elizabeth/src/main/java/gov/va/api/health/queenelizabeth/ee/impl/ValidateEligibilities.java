@@ -17,7 +17,7 @@ public class ValidateEligibilities implements Eligibilities {
 
   private Document parse(SoapMessageGenerator soapMessageGenerator, String xml) {
     try {
-      return XmlDocuments.create().parse(xml);
+      return XmlDocuments.parse(xml);
     } catch (XmlDocuments.ParseFailed e) {
       log.error("Couldn't parse EE response: {} ", e.getMessage());
       throw new RequestFailed(soapMessageGenerator, e);
