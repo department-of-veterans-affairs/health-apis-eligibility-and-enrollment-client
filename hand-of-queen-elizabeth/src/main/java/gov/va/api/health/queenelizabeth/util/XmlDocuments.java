@@ -16,6 +16,7 @@ import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import javax.xml.validation.Schema;
 import lombok.NoArgsConstructor;
 import org.w3c.dom.DOMImplementation;
 import org.w3c.dom.Document;
@@ -88,6 +89,29 @@ public final class XmlDocuments {
       factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
       factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
       factory.setValidating(true);
+      DocumentBuilder builder = factory.newDocumentBuilder();
+      InputSource is = new InputSource(new StringReader(xml));
+      return builder.parse(is);
+    } catch (ParserConfigurationException | SAXException | IOException e) {
+      throw new ParseFailed(e);
+    }
+  }
+
+  /**
+   * Parse the given XML into a Document Model. Validate the document against a given schema. A
+   * ParseFailed exception can be thrown if the document cannot be read for any reason.
+   */
+  public static Document parse(String xml, Schema schema) {
+    try {
+      System.setProperty(
+          "javax.xml.soap.SAAJMetaFactory", "com.sun.xml.messaging.saaj.soap.SAAJMetaFactoryImpl");
+      DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+      factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+      factory.setFeature("http://xml.org/sax/features/external-general-entities", false);
+      factory.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+      factory.setNamespaceAware(true);
+      factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+      factory.setSchema(schema);
       DocumentBuilder builder = factory.newDocumentBuilder();
       InputSource is = new InputSource(new StringReader(xml));
       return builder.parse(is);

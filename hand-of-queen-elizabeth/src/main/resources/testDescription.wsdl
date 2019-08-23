@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:sch="http://jaxws.webservices.esr.med.va.gov/schemas" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://jaxws.webservices.esr.med.va.gov/schemas" targetNamespace="http://jaxws.webservices.esr.med.va.gov/schemas">
+    <wsdl:types>
+        <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                    targetNamespace="urn:Test.Namespace"
+                    xmlns="urn:Test.Namespace"
+                    elementFormDefault="qualified">
+            <xsd:element name="Root">
+                <xsd:complexType>
+                    <xsd:sequence>
+                        <xsd:element name="element1" maxOccurs="unbounded" type="element1Type"/>
+                    </xsd:sequence>
+                </xsd:complexType>
+            </xsd:element>
+            <xsd:complexType name="element1Type">
+                <xsd:sequence>
+                    <xsd:element name="element2" maxOccurs="unbounded" type="element2Type"/>
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="element2Type">
+                <xsd:sequence>
+                    <xsd:element name="element3" type="element3Type"/>
+                </xsd:sequence>
+                <xsd:attribute name="id" type="xsd:string"/>
+            </xsd:complexType>
+            <xsd:complexType name="element3Type">
+                <xsd:attribute name="id" type="xsd:string"/>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
+</wsdl:definitions>

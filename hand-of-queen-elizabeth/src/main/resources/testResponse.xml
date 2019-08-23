@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root xmlns="urn:Test.Namespace" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="urn:Test.Namespace xsdSchema.xsd">
+  <element1 id="001">
+    <element2 id="001.1">
+      <element3 id="001.1"/>
+    </element2>
+  </element1>
+</Root>
