@@ -26,8 +26,8 @@
                     <xs:sequence>
                         <xs:element maxOccurs="1" minOccurs="0" name="candidates" type="eeSummary:ivmCandidateCollection"/>
                         <xs:element maxOccurs="1" minOccurs="1" name="numberOfCandidates" type="xs:int"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="eesVersion " type="xs:string"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="invocationDate " type="xs:date"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="eesVersion" type="xs:string"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="invocationDate" type="xs:date"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -35,8 +35,8 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element maxOccurs="1" minOccurs="0" name="ivmLetterCandidates" type="eeSummary:ivmLetterCandidateCollection"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="eesVersion " type="xs:string"/>
-                        <xs:element maxOccurs="1" minOccurs="1" name="invocationDate " type="xs:date"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="eesVersion" type="xs:string"/>
+                        <xs:element maxOccurs="1" minOccurs="1" name="invocationDate" type="xs:date"/>
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
@@ -219,7 +219,28 @@
                 <xs:all>
                     <xs:element minOccurs="0" name="address" type="baseAddressInfo"/>
                     <xs:element minOccurs="0" name="alternatePhone" type="xs:string"/>
-                    <xs:element minOccurs="0" name="contactType" type="xs:string"/>
+
+<!--
+			<xs:element name="contactType" type="xs:string" minOccurs="0"/>
+
+-->
+                    <xs:element minOccurs="0" name="contactType">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Primary Next of Kin"/>
+                                <xs:enumeration value="Other Next of Kin"/>
+                                <xs:enumeration value="Emergency Contact"/>
+                                <xs:enumeration value="Other emergency contact"/>
+                                <xs:enumeration value="Designee"/>
+                                <xs:enumeration value="Power of Attorney"/>
+                                <xs:enumeration value="Guardian VA"/>
+                                <xs:enumeration value="Guardian Civil"/>
+                                <xs:enumeration value="Beneficiary Representative"/>
+                                <xs:enumeration value="Spouse"/>
+                                <xs:enumeration value="Dependent"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="familyName" type="xs:string"/>
                     <xs:element minOccurs="0" name="givenName" type="xs:string"/>
                     <xs:element minOccurs="0" name="lastUpdateDate" type="xs:dateTime"/>
@@ -257,12 +278,28 @@
             </xs:complexType>
             <xs:complexType name="demographicInfo">
                 <xs:all>
-                    <xs:element minOccurs="0" name="appointmentRequestDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="appointmentRequestResponse" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="appointmentRequestDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="appointmentRequestChangeDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="originalAppointmentRequestResponse" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="originalAppointmentRequestDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="originalAppointmentRequestChangeDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="claimFolderLocation" type="xs:string"/>
                     <xs:element minOccurs="0" name="claimFolderNumber" type="xs:string"/>
                     <xs:element minOccurs="0" name="contactInfo" type="contactInfo"/>
-                    <xs:element minOccurs="0" name="ethnicity" type="xs:string"/>
+
+<!-- <xs:element name="ethnicity" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="ethnicity">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Hispanic or Latino"/>
+                                <xs:enumeration value="Not Hispanic or Latino"/>
+                                <xs:enumeration value="Unknown"/>
+                                <xs:enumeration value="Declined to answer"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="maritalStatus" type="xs:string"/>
                     <xs:element minOccurs="0" name="preferredFacility" type="xs:string"/>
                     <xs:element minOccurs="0" name="assignmentDate" type="xs:dateTime"/>
@@ -319,9 +356,54 @@
                     <xs:element minOccurs="0" name="addressChangeDateTime" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="addressChangeEffectiveDate" type="xs:string"/>
                     <xs:element minOccurs="0" name="addressChangeSite" type="xs:string"/>
-                    <xs:element minOccurs="0" name="addressChangeSource" type="xs:string"/>
+
+<!-- <xs:element name="addressChangeSource" type="xs:string"
+				minOccurs="0" />
+-->
+                    <xs:element minOccurs="0" name="addressChangeSource">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+<!--
+					<xs:enumeration value="HEC"/>
+					<xs:enumeration value="VAMC"/>
+					<xs:enumeration value="HBSC"/>
+					<xs:enumeration value="NCOA"/>
+					<xs:enumeration value="BVA"/>
+					<xs:enumeration value="VAINS"/>
+					<xs:enumeration value="USPS"/>
+					<xs:enumeration value="VA"/>
+					<xs:enumeration value="VOA"/>
+					<xs:enumeration value="VET360"/>
+
+-->
+                                <xs:enumeration value="Health Eligibility Center"/>
+                                <xs:enumeration value="Veterans Affairs Medical Center"/>
+                                <xs:enumeration value="Health Benefits Service Center"/>
+                                <xs:enumeration value="National Change of Address"/>
+                                <xs:enumeration value="Board of Veterans Appeals"/>
+                                <xs:enumeration value="Philadelphia Insurance Center"/>
+                                <xs:enumeration value="Change of Address file from US Postal Service"/>
+                                <xs:enumeration value="US Department of Veterans Affairs"/>
+                                <xs:enumeration value="Veterans Online Application"/>
+                                <xs:enumeration value="Authoritative Veteran and Beneficiary Profile Record"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="addressTypeCode" type="xs:string"/>
-                    <xs:element minOccurs="0" name="badAddressReason" type="xs:string"/>
+
+<!-- <xs:element name="badAddressReason" type="xs:string"
+				minOccurs="0" />
+-->
+                    <xs:element minOccurs="0" name="badAddressReason">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Mail was returned or is otherwise known to be undeliverable"/>
+                                <xs:enumeration value="Veteran has no known address"/>
+                                <xs:enumeration value="Address could not be shared for some reason other than &quot;homeless&quot; or &quot;undeliverable&quot;"/>
+                                <xs:enumeration value="For use by HEC only"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="confidentialAddressCategories" type="confidentialAddressCategoryCollection"/>
                     <xs:element minOccurs="0" name="endDate" type="xs:string"/>
                     <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
@@ -345,7 +427,17 @@
                     <xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="siteOfChange" type="xs:string"/>
                     <xs:element minOccurs="0" name="sourceOfChange" type="xs:string"/>
-                    <xs:element minOccurs="0" name="type" type="xs:string"/>
+
+<!-- <xs:element name="type" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="type">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Personal"/>
+                                <xs:enumeration value="Business"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                 </xs:all>
             </xs:complexType>
             <xs:complexType name="phoneCollection">
@@ -356,13 +448,49 @@
             <xs:complexType name="phoneInfo">
                 <xs:all>
                     <xs:element minOccurs="0" name="phoneNumber" type="xs:string"/>
-                    <xs:element minOccurs="0" name="type" type="xs:string"/>
+
+<!-- <xs:element name="type" type="xs:string" minOccurs="0" />
+-->
+                    <xs:element minOccurs="0" name="type">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Home"/>
+                                <xs:enumeration value="Business"/>
+                                <xs:enumeration value="Fax"/>
+                                <xs:enumeration value="Mobile"/>
+                                <xs:enumeration value="Pager"/>
+                                <xs:enumeration value="Insurance Carrier Phone"/>
+                                <xs:enumeration value="Pre-Certification Phone"/>
+                                <xs:enumeration value="Digital Pager"/>
+                                <xs:enumeration value="Voice Pager"/>
+                                <xs:enumeration value="Commercial"/>
+                                <xs:enumeration value="Other 1"/>
+                                <xs:enumeration value="Other 2"/>
+                                <xs:enumeration value="Temporary"/>
+                                <xs:enumeration value="VA Confidential Residence"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element maxOccurs="1" minOccurs="0" name="phoneNumberReportDate" type="xs:dateTime"/>
                 </xs:all>
             </xs:complexType>
             <xs:complexType name="raceCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="race" nillable="true" type="xs:string"/>
+<!-- <xs:element name="race" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+-->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="race" nillable="true">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="American Indian or Alaska Native"/>
+                                <xs:enumeration value="Asian"/>
+                                <xs:enumeration value="Black or African American"/>
+                                <xs:enumeration value="Native Hawaiian or Other Pacific Islander"/>
+                                <xs:enumeration value="White"/>
+                                <xs:enumeration value="Unknown"/>
+                                <xs:enumeration value="Declined to Answer"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="eligibilityVerificationInfo">
@@ -402,8 +530,38 @@
                     <xs:element minOccurs="0" name="noseThroatRadiumInfo" type="noseThroatRadiumInfo"/>
                     <xs:element minOccurs="0" name="otherEligibilities" type="eligibilityCollection"/>
                     <xs:element minOccurs="0" name="primaryEligibility" type="eligibilityInfo"/>
-                    <xs:element minOccurs="0" name="priorityGroup" type="xs:string"/>
-                    <xs:element minOccurs="0" name="prioritySubGroup" type="xs:string"/>
+
+<!-- <xs:element name="priorityGroup" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="priorityGroup">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Group 1"/>
+                                <xs:enumeration value="Group 2"/>
+                                <xs:enumeration value="Group 3"/>
+                                <xs:enumeration value="Group 4"/>
+                                <xs:enumeration value="Group 5"/>
+                                <xs:enumeration value="Group 6"/>
+                                <xs:enumeration value="Group 7"/>
+                                <xs:enumeration value="Group 8"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+
+<!-- <xs:element name="prioritySubGroup" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="prioritySubGroup">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="a"/>
+                                <xs:enumeration value="c"/>
+                                <xs:enumeration value="e"/>
+                                <xs:enumeration value="g"/>
+                                <xs:enumeration value="b"/>
+                                <xs:enumeration value="d"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="secondaryEligibilities" type="eligibilityCollection"/>
                     <xs:element minOccurs="0" name="serviceConnectionAward" type="serviceConnectionAwardInfo"/>
                     <xs:element minOccurs="0" name="specialFactors" type="specialFactorsInfo"/>
@@ -428,7 +586,18 @@
                     <xs:element minOccurs="0" name="cdProcedures" type="cdProcedureCollection"/>
                     <xs:element minOccurs="0" name="decisionDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="determinationFacility" type="xs:string"/>
-                    <xs:element minOccurs="0" name="determinationMethod" type="xs:string"/>
+
+<!-- <xs:element name="determinationMethod" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="determinationMethod">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Automated Record Review"/>
+                                <xs:enumeration value="Medical Record Review"/>
+                                <xs:enumeration value="Physical Examination"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="determinedBy" type="xs:string"/>
                     <xs:element minOccurs="0" name="diagnoses" type="cdDiagnosisCollection"/>
                     <xs:element minOccurs="0" name="facilityInitiatedCDReviewDate" type="xs:dateTime"/>
@@ -462,7 +631,46 @@
             </xs:complexType>
             <xs:complexType name="cdDiagnosisCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="diagnosis" nillable="true" type="xs:string"/>
+<!-- <xs:element name="diagnosis" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+-->
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="diagnosis" nillable="true">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Quadriplegia, C1-C4, Complete"/>
+                                <xs:enumeration value="Quadriplegia, C1-C4, Incomplete"/>
+                                <xs:enumeration value="Quadriplegia, C5-C7, Incomplete"/>
+                                <xs:enumeration value="Other Quadriplegia"/>
+                                <xs:enumeration value="Paraplegia"/>
+                                <xs:enumeration value="Legal Blindness, as defined in U.S.A."/>
+                                <xs:enumeration value="Persistent Vegetative State"/>
+                                <xs:enumeration value="Quadriplegia, Unspecified"/>
+                                <xs:enumeration value="Paraplegia, complete"/>
+                                <xs:enumeration value="Paraplegia, incomplete"/>
+                                <xs:enumeration value="Quadriplegia, unspecified"/>
+                                <xs:enumeration value="Quadriplegia, C1-C4 complete"/>
+                                <xs:enumeration value="Quadriplegia, C1-C4 incomplete"/>
+                                <xs:enumeration value="Quadriplegia, C5-C7 complete"/>
+                                <xs:enumeration value="Quadriplegia, C5-C7 incomplete"/>
+                                <xs:enumeration value="Blindness, both eyes"/>
+                                <xs:enumeration value="Blindness, one eye, low vision other eye, unspecified eyes"/>
+                                <xs:enumeration value="Blindness, right eye, low vision left eye"/>
+                                <xs:enumeration value="Blindness, left eye, low vision right eye"/>
+                                <xs:enumeration value="Blindness, one eye, unspecified eye"/>
+                                <xs:enumeration value="Blindness, right eye, normal vision left eye"/>
+                                <xs:enumeration value="Blindness, left eye, normal vision right eye"/>
+                                <xs:enumeration value="Legal blindness, as defined in USA"/>
+                                <xs:enumeration value="Persistent vegetative state"/>
+                                <xs:enumeration value="Paraplegia, unspecified"/>
+                                <xs:enumeration value="QUADRIPLEGIA"/>
+                                <xs:enumeration value="PARAPLEGIA"/>
+                                <xs:enumeration value="PERSISTENT VEGETATIVE STATE"/>
+                                <xs:enumeration value="LEGAL BLINDNESS"/>
+                                <xs:enumeration value="AMPUTATION, DISARTICULATION, OR DETACHMENT"/>
+                                <xs:enumeration value="DEFICIENCIES OF PHYSICAL OR MENTAL FUNCTION"/>
+                                <xs:enumeration value="DEAFNESS"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ineligibilityFactorInfo">
@@ -477,7 +685,19 @@
             <xs:complexType name="militarySexualTraumaInfo">
                 <xs:all>
                     <xs:element minOccurs="0" name="determinationFacility" type="xs:string"/>
-                    <xs:element minOccurs="0" name="status" type="xs:string"/>
+
+<!-- <xs:element name="status" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="status">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Unknown, Not Screened"/>
+                                <xs:enumeration value="Screened, Reports MST"/>
+                                <xs:enumeration value="Screened, Does Not Report MST"/>
+                                <xs:enumeration value="Screened, Declines To Answer"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="statusChangeDate" type="xs:dateTime"/>
                 </xs:all>
             </xs:complexType>
@@ -509,7 +729,18 @@
                     <xs:element minOccurs="0" name="receivingTreatment" type="xs:string"/>
                     <xs:element minOccurs="0" name="verificationDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="verificationFacility" type="xs:string"/>
-                    <xs:element minOccurs="0" name="verificationMethod" type="xs:string"/>
+
+<!-- <xs:element name="verificationMethod" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="verificationMethod">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Qualifying Military Service"/>
+                                <xs:enumeration value="Military Record"/>
+                                <xs:enumeration value="Not Qualified"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                 </xs:all>
             </xs:complexType>
             <xs:complexType name="eligibilityCollection">
@@ -534,7 +765,7 @@
                     <xs:element minOccurs="0" name="serviceConnectedIndicator" type="xs:boolean"/>
                     <xs:element minOccurs="0" name="serviceConnectedPercentage" type="xs:int"/>
                     <xs:element minOccurs="0" name="unemployable" type="xs:boolean"/>
-                    <xs:element maxOccurs="1" minOccurs="0" name="scReportDate " type="xs:dateTime"/>
+                    <xs:element maxOccurs="1" minOccurs="0" name="scReportDate" type="xs:dateTime"/>
                 </xs:all>
             </xs:complexType>
             <xs:complexType name="ratedDisabilityCollection">
@@ -557,7 +788,18 @@
             <xs:complexType name="specialFactorsInfo">
                 <xs:all>
                     <xs:element minOccurs="0" name="agentOrangeInd" type="xs:boolean"/>
-                    <xs:element minOccurs="0" name="agentOrangeLocation" type="xs:string"/>
+
+<!-- <xs:element name="agentOrangeLocation" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="agentOrangeLocation">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="KOREAN DMZ"/>
+                                <xs:enumeration value="VIETNAM"/>
+                                <xs:enumeration value="Other"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="envContaminantsInd" type="xs:boolean"/>
                     <xs:element minOccurs="0" name="campLejeuneInd" type="xs:boolean"/>
                     <xs:element minOccurs="0" name="radiationExposureInd" type="xs:boolean"/>
@@ -866,12 +1108,91 @@
                     <xs:element minOccurs="0" name="insAddress" type="addressInfo"/>
                     <xs:element minOccurs="0" name="insurancePhones" type="phoneCollection"/>
                     <xs:element minOccurs="0" name="insuranceSiteUploadStatus" type="xs:string"/>
-                    <xs:element minOccurs="0" name="insuredRelationship" type="xs:string"/>
+
+<!-- <xs:element name="insuredRelationship" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="insuredRelationship">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Veteran"/>
+                                <xs:enumeration value="Spouse"/>
+                                <xs:enumeration value="Other"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="insuranceMappingTypeName" type="xs:string"/>
                     <xs:element minOccurs="0" name="lastEditedDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="partAEffectiveDate" type="xs:string"/>
                     <xs:element minOccurs="0" name="partBEffectiveDate" type="xs:string"/>
-                    <xs:element minOccurs="0" name="planType" type="xs:string"/>
+
+<!-- <xs:element name="planType" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="planType">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="Accident And Health Insurance"/>
+                                <xs:enumeration value="Aviation Trip Insurance"/>
+                                <xs:enumeration value="Blue Cross/Blue Shield"/>
+                                <xs:enumeration value="Catastrophic Insurance"/>
+                                <xs:enumeration value="Tricare"/>
+                                <xs:enumeration value="Coinsurance"/>
+                                <xs:enumeration value="Comprehensive Major Medical"/>
+                                <xs:enumeration value="Dental Insurance"/>
+                                <xs:enumeration value="Dual Coverage"/>
+                                <xs:enumeration value="Health Maintenance Organiz"/>
+                                <xs:enumeration value="Inpatient (Basic Hospital)"/>
+                                <xs:enumeration value="Individual Practice Assocation (IPA)"/>
+                                <xs:enumeration value="Key-Man Health Insurance"/>
+                                <xs:enumeration value="Major Medical Expense Insurance"/>
+                                <xs:enumeration value="Managed Care System (MCS)"/>
+                                <xs:enumeration value="Medicaid"/>
+                                <xs:enumeration value="Medi-Cal"/>
+                                <xs:enumeration value="Medical Expense (Opt/Prof)"/>
+                                <xs:enumeration value="Medicare (M)"/>
+                                <xs:enumeration value="Medicare/Medicaid (Medi-Cal)"/>
+                                <xs:enumeration value="MEDIGAP PLAN C"/>
+                                <xs:enumeration value="No-Fault Insurance"/>
+                                <xs:enumeration value="Preferred Provider Organization (PPO)"/>
+                                <xs:enumeration value="Prepaid Group Practice Plan"/>
+                                <xs:enumeration value="Qualified Impairment Insurance"/>
+                                <xs:enumeration value="Regular Medical Expense Insurance"/>
+                                <xs:enumeration value="Retiree"/>
+                                <xs:enumeration value="Special Class Insurance"/>
+                                <xs:enumeration value="Special Risk Insurance"/>
+                                <xs:enumeration value="Specified Disease Insurance"/>
+                                <xs:enumeration value="Surgical Expense Insurance"/>
+                                <xs:enumeration value="Workers' Compensation Insurance"/>
+                                <xs:enumeration value="Labs, Procedures, X-Ray, Etc. (Only)"/>
+                                <xs:enumeration value="Income Protection (Indemnity)"/>
+                                <xs:enumeration value="Prescription"/>
+                                <xs:enumeration value="Mental Health"/>
+                                <xs:enumeration value="Hospital-Medical Insurance"/>
+                                <xs:enumeration value="Tricare Supplemental"/>
+                                <xs:enumeration value="Automobile"/>
+                                <xs:enumeration value="Carve-Out"/>
+                                <xs:enumeration value="Champva"/>
+                                <xs:enumeration value="MEDICARE SECONDARY (NO B EXC)"/>
+                                <xs:enumeration value="Point Of Service"/>
+                                <xs:enumeration value="Tort Feasor"/>
+                                <xs:enumeration value="MEDIGAP PLAN F"/>
+                                <xs:enumeration value="MEDIGAP PLAN A"/>
+                                <xs:enumeration value="MEDIGAP PLAN B"/>
+                                <xs:enumeration value="MEDIGAP PLAN D"/>
+                                <xs:enumeration value="MEDIGAP PLAN G"/>
+                                <xs:enumeration value="MEDIGAP PLAN K"/>
+                                <xs:enumeration value="MEDIGAP PLAN L"/>
+                                <xs:enumeration value="MEDIGAP PLAN M"/>
+                                <xs:enumeration value="MEDIGAP PLAN N"/>
+                                <xs:enumeration value="MEDICARE SECONDARY (B EXC)"/>
+                                <xs:enumeration value="MEDICARE SUPPLEMENTAL"/>
+                                <xs:enumeration value="HIGH DEDUCTIBLE HEALTH PLAN"/>
+                                <xs:enumeration value="HDHP w/HSA"/>
+                                <xs:enumeration value="HDHP w/HRA"/>
+                                <xs:enumeration value="HMO w/OON"/>
+                                <xs:enumeration value="EXCLUSIVE PROVIDER ORGANIZATION"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="policyEffectiveDate" type="xs:string"/>
                     <xs:element minOccurs="0" name="policyExpirationDate" type="xs:string"/>
                     <xs:element minOccurs="0" name="policyHolderName" type="xs:string"/>
@@ -982,14 +1303,38 @@
                 <xs:all>
                     <xs:element minOccurs="0" name="sensitivityChangeDate" type="xs:dateTime"/>
                     <xs:element minOccurs="0" name="sensitivityChangeSite" type="xs:string"/>
-                    <xs:element minOccurs="0" name="sensitivityChangeSource" type="xs:string"/>
+
+<!-- <xs:element name="sensitivityChangeSource" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="sensitivityChangeSource">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="HEC"/>
+                                <xs:enumeration value="VBA"/>
+                                <xs:enumeration value="VAMC"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                     <xs:element minOccurs="0" name="sensityFlag" type="xs:boolean"/>
                 </xs:all>
             </xs:complexType>
             <xs:complexType name="spinalCordInjuryInfo">
                 <xs:all>
                     <xs:element minOccurs="0" name="determinationFacility" type="xs:string"/>
-                    <xs:element minOccurs="0" name="spinalCordInjuryType" type="xs:string"/>
+
+<!-- <xs:element name="spinalCordInjuryType" type="xs:string" minOccurs="0"/>
+-->
+                    <xs:element minOccurs="0" name="spinalCordInjuryType">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:enumeration value="PARAPLEGIA-TRAUMATIC"/>
+                                <xs:enumeration value="QUADRIPLEGIA-TRAUMATIC"/>
+                                <xs:enumeration value="PARAPLEGIA-NONTRAUMATIC"/>
+                                <xs:enumeration value="QUADRIPLEGIA-NONTRAUMATIC"/>
+                                <xs:enumeration value="NOT APPLICABLE"/>
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
                 </xs:all>
             </xs:complexType>
             <xs:complexType name="preferredFacilityCollection">
@@ -1089,13 +1434,21 @@
                     <xs:element maxOccurs="unbounded" minOccurs="0" name="eligibility" nillable="true" type="vceEligibilityInfo"/>
                 </xs:sequence>
             </xs:complexType>
+            <xs:complexType name="geocodingInfo">
+                <xs:all>
+                    <xs:element minOccurs="0" name="addressLatitude" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="addressLongitude" type="xs:decimal"/>
+                    <xs:element minOccurs="0" name="geocodeDate" type="xs:dateTime"/>
+                    <xs:element minOccurs="0" name="geocodePointAccuracy" type="xs:string"/>
+                </xs:all>
+            </xs:complexType>
             <xs:complexType name="communityCareEligibilityInfo">
                 <xs:all>
-<!-- eligibility list 
+<!-- eligibility list
 -->
                     <xs:element maxOccurs="1" minOccurs="0" name="eligibilities" type="vceEligibilityCollection"/>
 
-<!-- Backwards compatibility eligibility elements 
+<!-- Backwards compatibility eligibility elements
 -->
                     <xs:element minOccurs="0" name="vceCode" type="xs:string"/>
                     <xs:element minOccurs="0" name="vceDescription" type="xs:string"/>
@@ -1103,6 +1456,10 @@
                     <xs:element minOccurs="0" name="censusURHCode" type="xs:string"/>
                     <xs:element minOccurs="0" name="censusURHCodeName" type="xs:string"/>
                     <xs:element minOccurs="0" name="censusURHCodeDescription" type="xs:string"/>
+
+<!-- PSSG geocoding info
+-->
+                    <xs:element maxOccurs="1" minOccurs="0" name="geocodingInfo" type="geocodingInfo"/>
                 </xs:all>
             </xs:complexType>
             <xs:complexType name="healthBenefitPlanCollection">
@@ -1112,14 +1469,14 @@
             </xs:complexType>
             <xs:complexType name="healthBenefitPlanInfo">
                 <xs:all>
-                    <xs:element minOccurs="1" name="name" type="xs:string"/>
+                    <xs:element minOccurs="1" name="planName" type="xs:string"/>
                     <xs:element minOccurs="1" name="effectiveDate" type="xs:dateTime"/>
 
-<!-- not available yet		
+<!-- not available yet
 			<xs:element name="description" type="xs:string" minOccurs="1"/>
 			<xs:element name="planCode" type="xs:string" minOccurs="1"/>
 			<xs:element name="coverageCode" type="xs:string" minOccurs="1"/>
- 			
+
 -->
                 </xs:all>
             </xs:complexType>
