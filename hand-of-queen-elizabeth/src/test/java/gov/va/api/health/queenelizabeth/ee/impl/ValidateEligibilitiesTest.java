@@ -4,7 +4,14 @@ import gov.va.api.health.queenelizabeth.Samples;
 import gov.va.api.health.queenelizabeth.ee.Eligibilities;
 import gov.va.api.health.queenelizabeth.ee.EligibilityInfo;
 import gov.va.api.health.queenelizabeth.ee.SoapMessageGenerator;
+import gov.va.api.health.queenelizabeth.util.XmlDocuments;
+import gov.va.api.health.queenelizabeth.util.XmlDocuments.ParseFailed;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import javax.xml.namespace.NamespaceContext;
 import javax.xml.soap.SOAPMessage;
+import javax.xml.validation.Schema;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -22,9 +29,15 @@ public class ValidateEligibilitiesTest {
   private ValidateEligibilities validateEligibilities;
 
   @Before
-  public void _init() {
+  public void _init() throws ParseFailed, IOException {
     MockitoAnnotations.initMocks(this);
-    validateEligibilities = new ValidateEligibilities(eligibilityInfo);
+    // Load schema from the application wsdl interface.
+    final Path resource = Paths.get("..", "ee-artifacts", "src", "main", "wsdl", "eeSummary.wsdl");
+    final Schema schema = XmlDocuments.getSchemaFromWsdl(resource.toFile().getAbsoluteFile());
+    final NamespaceContext namespaceContext =
+        new EeNamespaceContext(
+            XmlDocuments.getTargetNamespaceSchemaFromWsdl(resource.toFile().getAbsoluteFile()));
+    validateEligibilities = new ValidateEligibilities(eligibilityInfo, schema, namespaceContext);
   }
 
   @Test(expected = Eligibilities.MissingIcnValue.class)

@@ -32,6 +32,12 @@
     </dependency>
   </dependencies>
   <build>
+    <!-- Package the wsdl in the jar so it can be used for xml validation. -->
+    <resources>
+      <resource>
+        <directory>src/main/wsdl</directory>
+      </resource>
+    </resources>
     <plugins>
       <plugin>
         <!-- com.helger.maven is a branch of org.codehaus.mojo jaws-maven-plugin that works with Java 12 -->

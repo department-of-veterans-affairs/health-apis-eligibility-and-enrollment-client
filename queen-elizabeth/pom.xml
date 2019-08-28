@@ -41,4 +41,15 @@
       <version>${jaxws-rt.version}</version>
     </dependency>
   </dependencies>
+  <build>
+    <!-- Include the wsdl so it can be referenced in unit tests for validation purposes. -->
+    <testResources>
+      <testResource>
+        <directory>src/test/resources</directory>
+      </testResource>
+      <testResource>
+        <directory>../ee-artifacts/src/main/wsdl</directory>
+      </testResource>
+    </testResources>
+  </build>
 </project>
