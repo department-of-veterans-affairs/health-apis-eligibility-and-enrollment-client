@@ -23,6 +23,11 @@
       <version>${service-auto-config.version}</version>
     </dependency>
     <dependency>
+      <groupId>gov.va.api.health</groupId>
+      <artifactId>ee-artifacts</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-io</artifactId>
       <version>${commons-io.version}</version>
