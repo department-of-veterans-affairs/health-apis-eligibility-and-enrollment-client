@@ -1,5 +1,0 @@
-====
-
-    ${Ansi.BLUE}Urgent Care Eligibility Health API ${Ansi.BOLD}${Ansi.YELLOW}EE Client ${Ansi.NORMAL}${Ansi.BLUE}${application.version}${Ansi.NORMAL}
-
-====
