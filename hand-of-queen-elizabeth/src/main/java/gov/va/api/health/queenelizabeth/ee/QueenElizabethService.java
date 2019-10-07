@@ -10,7 +10,7 @@ import gov.va.med.esr.webservices.jaxws.schemas.EeSummaryPort;
 import gov.va.med.esr.webservices.jaxws.schemas.EeSummaryPortService;
 import gov.va.med.esr.webservices.jaxws.schemas.GetEESummaryRequest;
 import gov.va.med.esr.webservices.jaxws.schemas.GetEESummaryResponse;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.ws.Binding;
 import javax.xml.ws.BindingProvider;
@@ -30,6 +30,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class QueenElizabethService {
+
+  public static final String MISSING_ICN_MESSAGE = "ICN must be non-null and non-blank.";
 
   private final EeSummaryEndpointConfig config;
 
@@ -73,9 +75,7 @@ public class QueenElizabethService {
    * @return Linked List of GetEESummaryResponse.
    */
   public List<GetEESummaryResponse> getEeSummary(final List<String> icnList) {
-    // TODO: Does this really need to be a LinkedList?  LinkedList was specified by carma so I left
-    // it here?
-    List<GetEESummaryResponse> eeSummaryResponses = new LinkedList<>();
+    List<GetEESummaryResponse> eeSummaryResponses = new ArrayList<>();
     for (String icn : icnList) {
       eeSummaryResponses.add(getEeSummary(icn));
     }
@@ -90,7 +90,7 @@ public class QueenElizabethService {
    */
   public GetEESummaryResponse getEeSummary(final String icn) {
     if ((icn == null) || icn.isBlank()) {
-      throw new MissingIcnValue("ICN must be non-null and non-blank.");
+      throw new MissingIcnValue(MISSING_ICN_MESSAGE);
     }
     EeSummaryPort port = new EeSummaryPortService().getEeSummaryPortSoap11();
     overrideEndpointAddressProperty((BindingProvider) port);

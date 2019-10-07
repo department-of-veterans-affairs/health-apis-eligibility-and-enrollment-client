@@ -7,7 +7,6 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.Assert;
 
 /** Configure the WS Security Header for SOAP Messages with the values from property file. */
 @Slf4j
@@ -23,16 +22,30 @@ public class WsSecurityHeaderConfig implements InitializingBean {
   private String schema =
       "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd";
 
-  /** Required. */
+  /** Optional. */
   private String username;
 
-  /** Required. */
+  /** Optional. */
   private String password;
 
   @Override
   public void afterPropertiesSet() throws IllegalArgumentException {
-    Assert.notNull(username, "WsSecurityHeaderConfig username must not be null.");
-    Assert.notNull(password, "WsSecurityHeaderConfig password must not be null.");
+    // If configured to apply WS Security Header then both username and password must be specified.
+    if (username == null ^ password == null) {
+      throw new IllegalArgumentException(
+          "WsSecurityHeaderConfig has invalid header configuration.");
+    } else if (!applyHeader()) {
+      log.warn("WsSecurityHeaderConfig is configured to not add security header.");
+    }
+  }
+
+  /**
+   * Check if the configuration is set to apply header.
+   *
+   * @return Boolean indicating if security header should be applied.
+   */
+  public boolean applyHeader() {
+    return (username != null && password != null);
   }
 
   /**

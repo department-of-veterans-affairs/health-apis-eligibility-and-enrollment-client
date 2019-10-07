@@ -48,11 +48,12 @@ The QueenElizabethService is provided to an application that desired to perform 
    ee.request.name - required request name.
    
    # EE Security Header.
+   # The security header is technically optional to run a mock but appears to be required for a live interface.
    # Commented properties are optional and show the default values used if not specified.
    #ee.header.namespace=wsse
    #ee.header.schema=http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd
-   ee.header.username - required user name.
-   ee.header.password - required password.
+   ee.header.username - user name.
+   ee.header.password - password.
    
    # EE Test trust store.
    # The trust store is technically optional to run a mock but appears to be required for a live interface.

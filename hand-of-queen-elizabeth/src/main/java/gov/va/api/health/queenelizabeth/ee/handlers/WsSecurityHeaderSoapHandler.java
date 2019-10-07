@@ -27,26 +27,28 @@ public class WsSecurityHeaderSoapHandler extends BaseQueenElizabethSoapHandler {
    */
   @Override
   public boolean handleMessage(SOAPMessageContext context) {
-    try {
-      SOAPEnvelope env = context.getMessage().getSOAPPart().getEnvelope();
+    if (config.applyHeader()) {
+      try {
+        SOAPEnvelope env = context.getMessage().getSOAPPart().getEnvelope();
 
-      env.addNamespaceDeclaration(config.getNamespace(), config.getSchema());
+        env.addNamespaceDeclaration(config.getNamespace(), config.getSchema());
 
-      SOAPElement usernameToken =
-          env.getHeader()
-              .addChildElement("Security", config.getNamespace())
-              .addChildElement("UsernameToken", config.getNamespace());
+        SOAPElement usernameToken =
+            env.getHeader()
+                .addChildElement("Security", config.getNamespace())
+                .addChildElement("UsernameToken", config.getNamespace());
 
-      usernameToken
-          .addChildElement("Username", config.getNamespace())
-          .addTextNode(config.getUsername());
+        usernameToken
+            .addChildElement("Username", config.getNamespace())
+            .addTextNode(config.getUsername());
 
-      usernameToken
-          .addChildElement("Password", config.getNamespace())
-          .addTextNode(config.getPassword());
-    } catch (SOAPException e) {
-      // If anything fails adding the security header we should fail the request.
-      throw new RequestFailed(e.getMessage());
+        usernameToken
+            .addChildElement("Password", config.getNamespace())
+            .addTextNode(config.getPassword());
+      } catch (SOAPException e) {
+        // If anything fails adding the security header we should fail the request.
+        throw new RequestFailed(e.getMessage());
+      }
     }
 
     return true;
