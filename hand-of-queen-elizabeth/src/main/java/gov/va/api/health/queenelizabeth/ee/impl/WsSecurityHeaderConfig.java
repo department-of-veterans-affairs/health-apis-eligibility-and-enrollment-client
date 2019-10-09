@@ -30,7 +30,7 @@ public class WsSecurityHeaderConfig implements InitializingBean {
 
   @Override
   public void afterPropertiesSet() throws IllegalArgumentException {
-    // If configured to apply WS Security Header then both username and password must be specified.
+    // If configured to apply WS Security Header then both of these properties must be specified.
     if (username == null ^ password == null) {
       throw new IllegalArgumentException(
           "WsSecurityHeaderConfig has invalid header configuration.");

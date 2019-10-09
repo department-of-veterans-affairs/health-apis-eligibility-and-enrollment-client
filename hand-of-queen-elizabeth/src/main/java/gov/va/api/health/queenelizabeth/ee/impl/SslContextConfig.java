@@ -39,7 +39,7 @@ public class SslContextConfig implements InitializingBean {
 
   @Override
   public void afterPropertiesSet() throws IllegalArgumentException {
-    // If configured to use trust store then both path and password must be specified.
+    // If configured to use trust store then both of these properties must be specified.
     if (path == null ^ password == null) {
       throw new IllegalArgumentException("SslContextConfig has invalid trust store configuration.");
     } else if (path == null && password == null) {
@@ -60,14 +60,10 @@ public class SslContextConfig implements InitializingBean {
    * @return SSLContext.
    * @throws RuntimeException Exception for null classloader.
    * @throws IOException Exception for problem finding configured trust store.
-   * @throws KeyStoreException Exception for problem using key store.
    * @throws NoSuchAlgorithmException Exception for unsupported algorithm.
-   * @throws CertificateException Exception for problem with certificate.
-   * @throws KeyManagementException Exception with key management.
    */
   private SSLContext initSslContext()
-      throws IOException, KeyStoreException, NoSuchAlgorithmException, CertificateException,
-          KeyManagementException {
+      throws IOException, RuntimeException, NoSuchAlgorithmException {
     // Satisfying Fortify null check.
     ClassLoader cl = getClass().getClassLoader();
     if (cl == null) {
@@ -78,6 +74,7 @@ public class SslContextConfig implements InitializingBean {
       throw new IOException("Could not load trust store.");
     }
     // Load the truststore that contains the ee certs.
+    SSLContext sslContext = SSLContext.getInstance(ALGORITHM_PROTOCOL);
     try (InputStream truststoreInputStream = cl.getResourceAsStream(FilenameUtils.getName(path))) {
       KeyStore ts = KeyStore.getInstance(KEYSTORE_TYPE);
       ts.load(truststoreInputStream, password.toCharArray());
@@ -85,9 +82,10 @@ public class SslContextConfig implements InitializingBean {
           TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
       trustManagerFactory.init(ts);
       // Initialize the ssl context using the truststore.
-      SSLContext sslContext = SSLContext.getInstance(ALGORITHM_PROTOCOL);
       sslContext.init(null, trustManagerFactory.getTrustManagers(), new SecureRandom());
-      return sslContext;
+    } catch (IOException | CertificateException | KeyStoreException | KeyManagementException e) {
+      throw new RuntimeException(e.getMessage());
     }
+    return sslContext;
   }
 }
