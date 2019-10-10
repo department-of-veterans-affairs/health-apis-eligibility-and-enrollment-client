@@ -25,14 +25,12 @@ public class BaseFaultSoapHandler extends BaseQueenElizabethSoapHandler {
   /**
    * Check the SOAP Message fault string and throw exception.
    *
-   * @param message SOAP Message.
    * @param faultString Fault string.
    * @throws RequestFailed Exception if fault string not empty.
    */
-  protected void checkFaultString(final SOAPMessage message, final String faultString)
-      throws RequestFailed {
+  protected void checkFaultString(final String faultString) throws RequestFailed {
     if (!faultString.isBlank()) {
-      throw new RequestFailed(message, faultString);
+      throw new RequestFailed(faultString);
     }
   }
 
@@ -49,10 +47,10 @@ public class BaseFaultSoapHandler extends BaseQueenElizabethSoapHandler {
     SOAPFault fault = parseFault(message);
     final String faultString = fault.getFaultString();
     if (faultString == null) {
-      throw new RequestFailed(message, FAULT_STRING_NULL_MESSAGE);
+      throw new RequestFailed(FAULT_STRING_NULL_MESSAGE);
     }
-    checkFaultString(message, faultString);
-    throw new RequestFailed(message, FAULT_UNKNOWN_MESSAGE);
+    checkFaultString(faultString);
+    throw new RequestFailed(FAULT_UNKNOWN_MESSAGE);
   }
 
   /**
@@ -71,11 +69,11 @@ public class BaseFaultSoapHandler extends BaseQueenElizabethSoapHandler {
           fault = body.getFault();
         }
       } catch (SOAPException e) {
-        throw new RequestFailed(message, e.getMessage());
+        throw new RequestFailed(e.getMessage());
       }
     }
     if (fault == null) {
-      throw new RequestFailed(message, FAULT_NULL_MESSAGE);
+      throw new RequestFailed(FAULT_NULL_MESSAGE);
     }
     return fault;
   }

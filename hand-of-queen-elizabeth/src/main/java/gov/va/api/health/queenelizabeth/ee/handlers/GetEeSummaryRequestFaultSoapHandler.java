@@ -1,7 +1,6 @@
 package gov.va.api.health.queenelizabeth.ee.handlers;
 
 import gov.va.api.health.queenelizabeth.ee.exceptions.PersonNotFound;
-import javax.xml.soap.SOAPMessage;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,17 +14,15 @@ public class GetEeSummaryRequestFaultSoapHandler extends BaseFaultSoapHandler {
   /**
    * Check fault for person not found, otherwise perform default fault handling.
    *
-   * @param message SOAP Message.
    * @param faultString Fault string.
    * @throws PersonNotFound Exception if person not found.
    */
   @Override
-  protected void checkFaultString(final SOAPMessage message, final String faultString)
-      throws PersonNotFound {
+  protected void checkFaultString(final String faultString) throws PersonNotFound {
 
     if (faultString.equals(PERSON_NOT_FOUND_FAULT)) {
-      throw new PersonNotFound(message, faultString);
+      throw new PersonNotFound(faultString);
     }
-    super.checkFaultString(message, faultString);
+    super.checkFaultString(faultString);
   }
 }

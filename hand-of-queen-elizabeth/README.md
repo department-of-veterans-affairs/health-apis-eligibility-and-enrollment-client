@@ -78,7 +78,7 @@ Test of the interface required some sample responses for nominal and off-nominal
 
    * implementing gov.va.api.health.queenelizabeth.ee.mock test package that contains classes very similar to mock-ee.  See `MockEeSummarySoapServiceWsConfigurerAdapter.java` for further detail.
 
-3. Exception messages were refactored as I thought were originally implemented (concatenating `message.toString()` and reason `faultString`) but should be enhanced to capture fault codes and fault detail in a more clear message structure.  
+3. Exception messages were refactored as I thought were originally implemented (wrapping reason `faultString`) but could be enhanced to capture fault codes and fault detail in a more clear message structure.  
 
 4. Note that the `lombok.config` is configured to generate old style getters and setters.  This seemed to be needed for the configuration classes to be properly populated from application properties.
 
