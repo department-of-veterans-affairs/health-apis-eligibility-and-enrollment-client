@@ -10,8 +10,6 @@ The QueenElizabethService class provides an API to call the following services:
 
   If called with a list of ICN the getEeSummary will return a list of associated GetEESummaryResponse.
 
-  NOTE: the encapsulating eeSummary soap service methods are named for consistency with the service. However, legacy requestEligibility methods are provided here, but deprecated. This may be a measure that is unnecessary and if so we should eliminate these deprecated methods.
-
 * NOTE: other SOAP services specified by the wsdl are not implemented but the QueenElizabethService could be extended for each service by:
 
   * implement appropriate configuration class(es).

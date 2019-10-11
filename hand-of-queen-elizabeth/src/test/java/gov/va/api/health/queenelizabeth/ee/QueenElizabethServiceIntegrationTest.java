@@ -75,45 +75,11 @@ public class QueenElizabethServiceIntegrationTest {
         "Mileage eligibility for the Veterans Choice Program");
   }
 
-  /** Test a nominal response for a known sample using deprecated method. */
-  @Test
-  public void requestNominalDeprecated() {
-    GetEESummaryResponse response = service.requestEligibility("getEeSummaryResponseBody");
-    assertEquals(
-        response
-            .getSummary()
-            .getCommunityCareEligibilityInfo()
-            .getEligibilities()
-            .getEligibility()
-            .get(0)
-            .getVceDescription(),
-        "Mileage eligibility for the Veterans Choice Program");
-  }
-
   /** Test nominal responses for a known list of samples. */
   @Test
   public void requestNominalList() {
     List<GetEESummaryResponse> responseList =
         service.getEeSummary(Arrays.asList("getEeSummaryResponseBody", "getEeSummaryResponseBody"));
-    for (GetEESummaryResponse response : responseList) {
-      assertEquals(
-          response
-              .getSummary()
-              .getCommunityCareEligibilityInfo()
-              .getEligibilities()
-              .getEligibility()
-              .get(0)
-              .getVceDescription(),
-          "Mileage eligibility for the Veterans Choice Program");
-    }
-  }
-
-  /** Test nominal responses for a known list of samples using deprecated method. */
-  @Test
-  public void requestNominalListDeprecated() {
-    List<GetEESummaryResponse> responseList =
-        service.requestEligibility(
-            Arrays.asList("getEeSummaryResponseBody", "getEeSummaryResponseBody"));
     for (GetEESummaryResponse response : responseList) {
       assertEquals(
           response

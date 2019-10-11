@@ -23,9 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Service class to wrap the eeSummary soap services. NOTE: at this time, only the getEeSummary soap
  * service is provided, but others could easily be added here as needed by implementing appropriate
  * configuration classes, fault handlers, and methods. Encapsulated eeSummary soap services are
- * named for consistency with the service. However, legacy requestEligibility methods are provided
- * here, but deprecated. This may be a measure that is unnecessary and if so we should eliminate
- * these deprecated methods.
+ * named for consistency with the service.
  */
 @Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
@@ -114,31 +112,5 @@ public class QueenElizabethService {
           .getRequestContext()
           .put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, config.getUrl());
     }
-  }
-
-  /**
-   * Request getEESummary from the getEESummary SOAP Service repeatedly for a list of ICN.
-   * Deprecated method included here for backwards compatibility.
-   *
-   * @param icnList List of ICN.
-   * @return List of GetEESummaryResponse.
-   * @deprecated Call getEeSummary in lieu of requestEligibility.
-   */
-  @Deprecated
-  public List<GetEESummaryResponse> requestEligibility(final List<String> icnList) {
-    return getEeSummary(icnList);
-  }
-
-  /**
-   * Request getEESummary from the getEESummary SOAP Service. Deprecated method included here for
-   * backwards compatibility.
-   *
-   * @param icn ICN.
-   * @return GetEESummaryResponse.
-   * @deprecated Call getEeSummary in lieu of requestEligibility.
-   */
-  @Deprecated
-  public GetEESummaryResponse requestEligibility(final String icn) {
-    return getEeSummary(icn);
   }
 }
