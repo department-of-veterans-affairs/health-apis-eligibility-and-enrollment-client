@@ -47,10 +47,11 @@
               <goal>wsimport</goal>
             </goals>
             <configuration>
-              <wsdlDirectory>src/main/wsdl</wsdlDirectory>
+              <wsdlDirectory>src/main/resources/META-INF/wsdl/</wsdlDirectory>
               <wsdlFiles>
                 <wsdlFile>eeSummary.wsdl</wsdlFile>
               </wsdlFiles>
+              <wsdlLocation>META-INF/wsdl/*</wsdlLocation>
               <keep>true</keep>
               <sourceDestDir>src/main/java</sourceDestDir>
               <args>
