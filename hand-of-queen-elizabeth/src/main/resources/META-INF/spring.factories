@@ -1,2 +1,0 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  gov.va.api.health.queenelizabeth.ee.impl.QueenElizabethConfig
