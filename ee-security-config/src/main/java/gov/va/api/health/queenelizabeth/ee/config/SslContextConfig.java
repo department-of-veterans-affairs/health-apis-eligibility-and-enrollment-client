@@ -1,4 +1,4 @@
-package gov.va.api.health.queenelizabeth.ee.impl;
+package gov.va.api.health.queenelizabeth.ee.config;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -18,15 +18,13 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 
-/** Configure the SSL Context using the configured trust store. */
+/** Configuration bean to hold the SSL Context using a configured trust store. */
 @Slf4j
 @Configuration
 @ConfigurationProperties("ee.truststore")
 @Data
 public class SslContextConfig implements InitializingBean {
 
-  // TODO: It is not clear if TLS is the correct value
-  // ie, (would TLSv1.2 be more appropriate)?
   // See
   // https://docs.oracle.com/javase/8/docs/technotes/guides/security/StandardNames.html#SSLContext
   private static final String ALGORITHM_PROTOCOL = "TLS";

@@ -1,13 +1,14 @@
 package gov.va.api.health.queenelizabeth.ee.mock;
 
-import gov.va.api.health.queenelizabeth.ee.impl.WsSecurityHeaderConfig;
 import gov.va.api.health.queenelizabeth.ee.mock.faults.DetailFaultException;
 import gov.va.api.health.queenelizabeth.ee.mock.faults.DetailSoapFaultDefinitionExceptionResolver;
 import gov.va.api.health.queenelizabeth.ee.mock.faults.ServiceFaultClientException;
 import gov.va.api.health.queenelizabeth.ee.mock.faults.ServiceFaultServerException;
 import java.util.List;
 import java.util.Properties;
-import lombok.RequiredArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.ApplicationContext;
@@ -17,7 +18,6 @@ import org.springframework.ws.config.annotation.EnableWs;
 import org.springframework.ws.config.annotation.WsConfigurerAdapter;
 import org.springframework.ws.server.EndpointInterceptor;
 import org.springframework.ws.soap.security.wss4j2.Wss4jSecurityInterceptor;
-import org.springframework.ws.soap.security.wss4j2.callback.SimplePasswordValidationCallbackHandler;
 import org.springframework.ws.soap.server.endpoint.SoapFaultDefinition;
 import org.springframework.ws.soap.server.endpoint.SoapFaultMappingExceptionResolver;
 import org.springframework.ws.transport.http.MessageDispatcherServlet;
@@ -26,22 +26,26 @@ import org.springframework.xml.xsd.SimpleXsdSchema;
 import org.springframework.xml.xsd.XsdSchema;
 
 /**
- * A WS Configurer Adapter to configure the Mock eeSummary SOAP service.
- *
- * <p>Note that other than this class supports simulation of custom fault handling via the
- * exceptionResolver but other than that it is basically the same as mockee WebServiceConfig.
+ * A WS Configurer Adapter to configure a Mock eeSummary SOAP service that provides custom client
+ * and server detail fault handling via a custom exception resolver.
  */
 @EnableWs
-@RequiredArgsConstructor(onConstructor_ = @Autowired)
+@Data
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = false)
 public class MockEeSummarySoapServiceWsConfigurerAdapter extends WsConfigurerAdapter {
 
   public static final String mockEeVersion = "/v0";
 
-  private final WsSecurityHeaderConfig config;
+  /** Optional SecurityInterceptor. */
+  @Autowired(required = false)
+  private Wss4jSecurityInterceptor securityInterceptor;
 
   @Override
   public void addInterceptors(List<EndpointInterceptor> interceptors) {
-    interceptors.add(securityInterceptor());
+    if (securityInterceptor != null) {
+      interceptors.add(securityInterceptor);
+    }
   }
 
   /** Default Wsdl. */
@@ -58,7 +62,7 @@ public class MockEeSummarySoapServiceWsConfigurerAdapter extends WsConfigurerAda
   /** Get XSD Schema. */
   @Bean
   public XsdSchema eeSchema() {
-    return new SimpleXsdSchema(new ClassPathResource("wsdl/eeSummary.xsd"));
+    return new SimpleXsdSchema(new ClassPathResource("META-INF/xsd/eeSummary.xsd"));
   }
 
   /**
@@ -97,25 +101,5 @@ public class MockEeSummarySoapServiceWsConfigurerAdapter extends WsConfigurerAda
     servlet.setApplicationContext(applicationContext);
     servlet.setTransformWsdlLocations(true);
     return new ServletRegistrationBean<MessageDispatcherServlet>(servlet, mockEeVersion + "/ws/*");
-  }
-
-  /** Validation for user/password. */
-  @Bean
-  public SimplePasswordValidationCallbackHandler securityCallbackHandler() {
-    SimplePasswordValidationCallbackHandler callbackHandler =
-        new SimplePasswordValidationCallbackHandler();
-    Properties users = new Properties();
-    users.setProperty(config.getUsername(), config.getPassword());
-    callbackHandler.setUsers(users);
-    return callbackHandler;
-  }
-
-  /** Security Interceptor. */
-  @Bean
-  public Wss4jSecurityInterceptor securityInterceptor() {
-    Wss4jSecurityInterceptor securityInterceptor = new Wss4jSecurityInterceptor();
-    securityInterceptor.setValidationActions("UsernameToken");
-    securityInterceptor.setValidationCallbackHandler(securityCallbackHandler());
-    return securityInterceptor;
   }
 }

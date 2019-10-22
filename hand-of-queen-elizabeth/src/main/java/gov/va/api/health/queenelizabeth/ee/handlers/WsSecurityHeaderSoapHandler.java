@@ -1,20 +1,25 @@
 package gov.va.api.health.queenelizabeth.ee.handlers;
 
+import gov.va.api.health.queenelizabeth.ee.config.WsSecurityHeaderConfig;
 import gov.va.api.health.queenelizabeth.ee.exceptions.RequestFailed;
-import gov.va.api.health.queenelizabeth.ee.impl.WsSecurityHeaderConfig;
 import javax.xml.soap.SOAPElement;
 import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Custom soap handler used by Queen Elizabeth Service to optionally add WS Security Headers to soap
  * request messages.
  */
+@Configuration
+@ConditionalOnBean(WsSecurityHeaderConfig.class)
+@RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Slf4j
-@RequiredArgsConstructor
 public class WsSecurityHeaderSoapHandler extends BaseQueenElizabethSoapHandler {
 
   private final WsSecurityHeaderConfig config;

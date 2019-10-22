@@ -1,4 +1,4 @@
-package gov.va.api.health.queenelizabeth.ee.impl;
+package gov.va.api.health.queenelizabeth.ee.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,25 +12,25 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
  * Test loading an SslContextConfig configuration from properties and forcefully testing the case
- * where the trust store configuration is invalid resulting in an IllegalArgumentException.
+ * where the trust store can not be found resulting in an IllegalArgumentException.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-  classes = SslContextConfigIncompleteConfigTest.TestConfiguration.class,
+  classes = SslContextConfigInvalidPathTest.TestConfiguration.class,
   initializers = ConfigFileApplicationContextInitializer.class
 )
 @DirtiesContext
-public class SslContextConfigIncompleteConfigTest {
+public class SslContextConfigInvalidPathTest {
 
   @Autowired private SslContextConfig config;
 
   /**
-   * By setting the password to null the result will be an IllegalArgumentException which prevents
-   * application from starting.
+   * By setting the trust store to an invalid path the result will be an IllegalArgumentException
+   * which prevents application from starting.
    */
   @Test(expected = IllegalArgumentException.class)
-  public void testIncompleteTrustStoreConfig() {
-    config.setPassword(null);
+  public void testInvalidTrustStoreConfig() {
+    config.setPath("invalid.jks");
     config.afterPropertiesSet();
   }
 

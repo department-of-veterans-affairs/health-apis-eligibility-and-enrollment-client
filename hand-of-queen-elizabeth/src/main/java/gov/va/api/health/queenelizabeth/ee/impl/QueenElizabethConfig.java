@@ -1,6 +1,9 @@
 package gov.va.api.health.queenelizabeth.ee.impl;
 
 import gov.va.api.health.queenelizabeth.ee.QueenElizabethService;
+import gov.va.api.health.queenelizabeth.ee.config.SslContextConfig;
+import gov.va.api.health.queenelizabeth.ee.config.WsSecurityHeaderConfig;
+import gov.va.api.health.queenelizabeth.ee.handlers.WsSecurityHeaderSoapHandler;
 import org.springframework.context.annotation.Import;
 
 /**
@@ -12,6 +15,7 @@ import org.springframework.context.annotation.Import;
   EeSummaryEndpointConfig.class,
   SslContextConfig.class,
   WsSecurityHeaderConfig.class,
+  WsSecurityHeaderSoapHandler.class,
   GetEeSummaryRequestConfig.class,
   QueenElizabethService.class
 })

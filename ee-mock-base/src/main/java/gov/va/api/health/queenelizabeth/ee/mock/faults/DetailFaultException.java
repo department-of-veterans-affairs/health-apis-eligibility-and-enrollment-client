@@ -1,6 +1,7 @@
 package gov.va.api.health.queenelizabeth.ee.mock.faults;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 
 /**
  * Custom exception to store a detail string that will be inserted into a SOAPFault. This exception
@@ -8,6 +9,7 @@ import lombok.Data;
  * recognize the exception and manipulate.
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class DetailFaultException extends RuntimeException {
 
   private static final long serialVersionUID = 1L;

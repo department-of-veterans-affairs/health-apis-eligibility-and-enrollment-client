@@ -18,6 +18,7 @@
     <jaxws-rt.version>2.3.2</jaxws-rt.version>
     <jaxws-maven-plugin.version>2.6.2</jaxws-maven-plugin.version>
     <lombok-xjc-plugin.version>1.0.1</lombok-xjc-plugin.version>
+    <schema-from-wsdl-maven-plugin.version>1.0.0-SNAPSHOT</schema-from-wsdl-maven-plugin.version>
   </properties>
   <dependencies>
     <dependency>
@@ -70,6 +71,26 @@
             <version>${lombok-xjc-plugin.version}</version>
           </dependency>
         </dependencies>
+      </plugin>
+      <plugin>
+        <groupId>gov.va.plugin.maven</groupId>
+        <artifactId>schema-from-wsdl-maven-plugin</artifactId>
+        <version>${schema-from-wsdl-maven-plugin.version}</version>
+        <executions>
+          <execution>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>schema-from-wsdl</goal>
+            </goals>
+            <configuration>
+              <wsdlDirectory>src/main/resources/META-INF/wsdl/</wsdlDirectory>
+              <wsdlFiles>
+                <wsdlFile>eeSummary.wsdl</wsdlFile>
+              </wsdlFiles>
+              <sourceDestDir>${basedir}/target/classes/META-INF/xsd</sourceDestDir>
+            </configuration>
+          </execution>
+        </executions>
       </plugin>
       <!-- It would be silly to reformat generated source. -->
       <plugin>

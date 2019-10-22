@@ -1,14 +1,15 @@
-package gov.va.api.health.queenelizabeth.ee.impl;
+package gov.va.api.health.queenelizabeth.ee.config;
 
-import gov.va.api.health.queenelizabeth.ee.handlers.WsSecurityHeaderSoapHandler;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/** Configure the WS Security Header for SOAP Messages with the values from property file. */
+/**
+ * Configuration bean to hold configured WS Security Header settings for SOAP Messages with the
+ * values from property file.
+ */
 @Slf4j
 @Configuration
 @ConfigurationProperties("ee.header")
@@ -46,15 +47,5 @@ public class WsSecurityHeaderConfig implements InitializingBean {
    */
   public boolean applyHeader() {
     return (username != null && password != null);
-  }
-
-  /**
-   * Construct a bean to add the security header to SOAP Messages.
-   *
-   * @return WsSecurityHeaderSoapHandler bean.
-   */
-  @Bean
-  public WsSecurityHeaderSoapHandler wsSecurityHeaderSoapHandler() {
-    return new WsSecurityHeaderSoapHandler(this);
   }
 }

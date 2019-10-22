@@ -1,4 +1,4 @@
-package gov.va.api.health.queenelizabeth.ee.impl;
+package gov.va.api.health.queenelizabeth.ee.config;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,31 +11,29 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
- * Test loading an WsSecurityHeaderConfig configuration from properties and forcefully testing the
- * case where the configuration is invalid resulting in an IllegalArgumentException.
+ * Test loading an SslContextConfig configuration from properties and forcefully testing the case
+ * where the application is configured to not use a trust store.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-  classes = WsSecurityHeaderConfigTest.TestConfiguration.class,
+  classes = SslContextConfigNoTrustStoreConfigTest.TestConfiguration.class,
   initializers = ConfigFileApplicationContextInitializer.class
 )
 @DirtiesContext
-public class WsSecurityHeaderConfigTest {
+public class SslContextConfigNoTrustStoreConfigTest {
 
-  @Autowired private WsSecurityHeaderConfig config;
+  @Autowired private SslContextConfig config;
 
-  /**
-   * By setting the password to invalid value the result will be an IllegalArgumentException which
-   * prevents application from starting.
-   */
-  @Test(expected = IllegalArgumentException.class)
-  public void testIncompleteHeaderConfig() {
+  /** If both the password and path are not set then the application will not use a trust store. */
+  @Test
+  public void testNoTrustStoreConfig() {
     config.setPassword(null);
+    config.setPath(null);
     config.afterPropertiesSet();
   }
 
-  /** Load test context with just the WsSecurityHeaderConfig. */
+  /** Load test context with just the SslContextConfig. */
   @EnableAutoConfiguration
-  @EnableConfigurationProperties(value = {WsSecurityHeaderConfig.class})
+  @EnableConfigurationProperties(value = {SslContextConfig.class})
   public static class TestConfiguration {}
 }

@@ -11,6 +11,8 @@
   <packaging>pom</packaging>
   <modules>
     <module>ee-artifacts</module>
+    <module>ee-security-config</module>
+    <module>ee-mock-base</module>
     <module>hand-of-queen-elizabeth</module>
   </modules>
 </project>

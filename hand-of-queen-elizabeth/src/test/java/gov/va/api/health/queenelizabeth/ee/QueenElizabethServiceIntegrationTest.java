@@ -6,7 +6,7 @@ import gov.va.api.health.queenelizabeth.ee.exceptions.MissingIcnValue;
 import gov.va.api.health.queenelizabeth.ee.exceptions.PersonNotFound;
 import gov.va.api.health.queenelizabeth.ee.exceptions.RequestFailed;
 import gov.va.api.health.queenelizabeth.ee.impl.QueenElizabethConfig;
-import gov.va.api.health.queenelizabeth.ee.mock.MockEeSummarySoapServiceWsConfigurerAdapter;
+import gov.va.api.health.queenelizabeth.ee.mock.MockEeSummarySoapServiceWsConfigurerAdapterConfig;
 import gov.va.api.health.queenelizabeth.ee.mock.endpoints.MockEeSummaryEndpoint;
 import gov.va.api.health.queenelizabeth.ee.mock.endpoints.MockEeSummaryResponse;
 import gov.va.med.esr.webservices.jaxws.schemas.GetEESummaryResponse;
@@ -32,7 +32,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @ContextConfiguration(
   classes = {
     QueenElizabethConfig.class,
-    MockEeSummarySoapServiceWsConfigurerAdapter.class,
+    MockEeSummarySoapServiceWsConfigurerAdapterConfig.class,
     MockEeSummaryEndpoint.class,
     MockEeSummaryResponse.class
   },
