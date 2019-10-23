@@ -2,6 +2,7 @@ package gov.va.api.health.queenelizabeth.ee.mock;
 
 import static org.junit.Assert.assertNotNull;
 
+import gov.va.api.health.queenelizabeth.ee.mock.endpoints.mock.MockEeSummaryResponseImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest
 @EnableAutoConfiguration
 @ContextConfiguration(
-  classes = {MockEeSummarySoapServiceWsConfigurerAdapterConfig.class},
+  classes = {MockEeSummarySoapServiceConfig.class, MockEeSummaryResponseImpl.class},
   initializers = ConfigFileApplicationContextInitializer.class
 )
 @DirtiesContext

@@ -6,8 +6,7 @@ import gov.va.api.health.queenelizabeth.ee.exceptions.MissingIcnValue;
 import gov.va.api.health.queenelizabeth.ee.exceptions.PersonNotFound;
 import gov.va.api.health.queenelizabeth.ee.exceptions.RequestFailed;
 import gov.va.api.health.queenelizabeth.ee.impl.QueenElizabethConfig;
-import gov.va.api.health.queenelizabeth.ee.mock.MockEeSummarySoapServiceWsConfigurerAdapterConfig;
-import gov.va.api.health.queenelizabeth.ee.mock.endpoints.MockEeSummaryEndpoint;
+import gov.va.api.health.queenelizabeth.ee.mock.MockEeSummarySoapServiceApplication;
 import gov.va.api.health.queenelizabeth.ee.mock.endpoints.MockEeSummaryResponse;
 import gov.va.med.esr.webservices.jaxws.schemas.GetEESummaryResponse;
 import java.util.Arrays;
@@ -15,10 +14,8 @@ import java.util.List;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ContextConfiguration;
+import org.springframework.context.annotation.Import;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 /**
@@ -27,17 +24,11 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * defined port (pulled from application.properties).
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
-@EnableAutoConfiguration
-@ContextConfiguration(
-  classes = {
-    QueenElizabethConfig.class,
-    MockEeSummarySoapServiceWsConfigurerAdapterConfig.class,
-    MockEeSummaryEndpoint.class,
-    MockEeSummaryResponse.class
-  },
-  initializers = ConfigFileApplicationContextInitializer.class
+@SpringBootTest(
+  classes = MockEeSummarySoapServiceApplication.class,
+  webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT
 )
+@Import({QueenElizabethConfig.class})
 public class QueenElizabethServiceIntegrationTest {
 
   @Autowired private QueenElizabethService service;

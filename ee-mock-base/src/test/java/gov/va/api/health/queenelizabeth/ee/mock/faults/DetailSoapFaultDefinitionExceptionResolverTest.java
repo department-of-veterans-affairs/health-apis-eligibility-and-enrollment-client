@@ -2,7 +2,8 @@ package gov.va.api.health.queenelizabeth.ee.mock.faults;
 
 import static org.junit.Assert.assertEquals;
 
-import gov.va.api.health.queenelizabeth.ee.mock.MockEeSummarySoapServiceWsConfigurerAdapterConfig;
+import gov.va.api.health.queenelizabeth.ee.mock.MockEeSummarySoapServiceConfig;
+import gov.va.api.health.queenelizabeth.ee.mock.endpoints.mock.MockEeSummaryResponseImpl;
 import java.io.StringWriter;
 import javax.xml.XMLConstants;
 import javax.xml.soap.MessageFactory;
@@ -39,7 +40,9 @@ import org.w3c.dom.Node;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
-@ContextConfiguration(classes = {MockEeSummarySoapServiceWsConfigurerAdapterConfig.class})
+@ContextConfiguration(
+  classes = {MockEeSummarySoapServiceConfig.class, MockEeSummaryResponseImpl.class}
+)
 @DirtiesContext
 public class DetailSoapFaultDefinitionExceptionResolverTest {
 

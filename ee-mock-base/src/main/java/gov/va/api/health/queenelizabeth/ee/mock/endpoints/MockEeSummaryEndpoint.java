@@ -15,8 +15,9 @@ import org.springframework.ws.server.endpoint.annotation.RequestPayload;
 import org.springframework.ws.server.endpoint.annotation.ResponsePayload;
 
 /**
- * Mock eeSummary.getEESummaryRequest SOAP Service endpoint that uses an MockEeSummaryResponse to
- * get soap message xml strings to unmarshall into an GetEESummaryResponse.
+ * Mock eeSummary.getEESummaryRequest SOAP Service endpoint that uses an implementation of
+ * AbstractMockEeSummaryResponse to get soap message xml strings to unmarshall into an
+ * GetEESummaryResponse.
  */
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 @Endpoint
@@ -24,7 +25,7 @@ public class MockEeSummaryEndpoint {
 
   private static final String NAMESPACE_URI = "http://jaxws.webservices.esr.med.va.gov/schemas";
 
-  private final MockEeSummaryResponse eeResponseEntityMock;
+  private final AbstractMockEeSummaryResponse eeResponseEntityMock;
 
   /**
    * Simulate a SOAP Service getEeSummaryRequest endpoint.

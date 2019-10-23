@@ -67,18 +67,9 @@ Test of the interface required some sample responses for nominal and off-nominal
 
 ## Known Issues/Concerns
 
-1. The SSL Context Algorithm used is 'TLS'.  It is not clear if this is entirely correct.  See SslContextConfig.java for further detail.
+1. Exception messages were refactored as I thought were originally implemented (wrapping reason `faultString`) but could be enhanced to capture fault codes and fault detail in a more clear message structure.  
 
-2. Integration tests run a mock eeSummary SOAP Service to test the messaging round trip for both nominal and off-nominal request scenarios.
+2. Note that the `lombok.config` is configured to generate old style getters and setters.  This seemed to be needed for the configuration classes to be properly populated from application properties.
 
-   This required:
-   * access to a schema associated with the `eeSummary.wsdl`. Rather than create the eeSummary.xsd by hand, the ee-artifacts project should probably be updated to dynamically pull the `eeSummary.xsd` from the `eeSummary.wsdl` and package/expose as appropriate to subsequent mock service project(s) that may require an associated schema.  This xsd and wsdl now is duplicated in this project and mock-ee.
-
-   * implementing gov.va.api.health.queenelizabeth.ee.mock test package that contains classes very similar to mock-ee.  See `MockEeSummarySoapServiceWsConfigurerAdapter.java` for further detail.
-
-3. Exception messages were refactored as I thought were originally implemented (wrapping reason `faultString`) but could be enhanced to capture fault codes and fault detail in a more clear message structure.  
-
-4. Note that the `lombok.config` is configured to generate old style getters and setters.  This seemed to be needed for the configuration classes to be properly populated from application properties.
-
-5. To eliminate an SOAP XML parsing warning the following file seemed to be required:
+3. To eliminate an SOAP XML parsing warning the following file seemed to be required:
   `src/main/resources/META-INF/services/javax.xml.soap.SAAJMetaFactory`

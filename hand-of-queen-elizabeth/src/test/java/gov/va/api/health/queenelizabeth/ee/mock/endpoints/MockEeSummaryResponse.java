@@ -1,12 +1,11 @@
 package gov.va.api.health.queenelizabeth.ee.mock.endpoints;
 
-import gov.va.api.health.queenelizabeth.ee.mock.faults.ServiceFaultClientException;
 import gov.va.api.health.queenelizabeth.ee.mock.faults.ServiceFaultServerException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.SneakyThrows;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 
@@ -18,10 +17,11 @@ import org.springframework.util.Assert;
  * <p>Other faults can be simulated by specifying the associated fault enum key as an ICN.
  */
 @Component
-public class MockEeSummaryResponse {
+@Slf4j
+public class MockEeSummaryResponse extends AbstractMockEeSummaryResponse {
 
-  @SneakyThrows
-  public String getEeSummaryRequest(String icn) {
+  @Override
+  protected void checkIcn(final String icn) {
     Assert.notNull(icn, "The icn must not be null");
     // First check if this is a fault key.
     // If a fault is not found then assume this is an actual icn.
@@ -30,17 +30,22 @@ public class MockEeSummaryResponse {
       // If connection refused then throw server exception to simulate the condition.
       throw new ServiceFaultServerException(fault.getMessage(), fault.getDetail());
     }
+  }
+
+  @Override
+  protected String obtainResponse(final String icn) {
     // Attempt to load a string for the response from a sample file.
-    // If file not found then a person not found exception is simulated.
-    String response;
+    // If file not found then the response will be null and a person not found exception will
+    // ultimately be simulated.
+    String response = null;
     try {
       response =
           new String(
               Files.readAllBytes(Paths.get("src", "test", "resources", "samples", icn + ".xml")));
     } catch (Exception e) {
-      throw new ServiceFaultClientException(
-          "PERSON_NOT_FOUND",
-          "Unable to invoke SOA ESR due to: Unable to invoke service with EntityFinder arg: HealthAPISvcUsr:CommunityCareInfo due to exception message: Invalid VPID and root cause stack trace: gov.va.med.person.idmgmt.exceptions.VPIDException: Invalid VPID checkdigit: 123456");
+      log.warn(
+          "Unable to read resource sample for {} which will result in person not found fault.",
+          icn);
     }
     return response;
   }
