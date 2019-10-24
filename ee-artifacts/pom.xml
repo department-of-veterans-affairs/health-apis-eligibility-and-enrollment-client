@@ -78,7 +78,6 @@
         <version>${schema-from-wsdl-maven-plugin.version}</version>
         <executions>
           <execution>
-            <phase>generate-sources</phase>
             <goals>
               <goal>schema-from-wsdl</goal>
             </goals>

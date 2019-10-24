@@ -4,7 +4,7 @@ Provides base configuration and endpoint classes used to configure a Mock eeSumm
 
 Mock services only need to provide their custom implementation to obtain a response for an ICN.
 
-The WS Configurer Adapter to can be optionally configured to use a `SecurityInterceptor` to use a callback handler to perform `UsernameToken` validation.
+The WS Configurer Adapter can be optionally configured to use a `SecurityInterceptor` which uses a callback handler to perform `UsernameToken` validation.
 
 ## Usage
 
