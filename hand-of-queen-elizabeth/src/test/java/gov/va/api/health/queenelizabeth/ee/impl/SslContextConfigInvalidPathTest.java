@@ -16,9 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-  classes = SslContextConfigInvalidPathTest.TestConfiguration.class,
-  initializers = ConfigFileApplicationContextInitializer.class
-)
+    classes = SslContextConfigInvalidPathTest.TestConfiguration.class,
+    initializers = ConfigFileApplicationContextInitializer.class)
 @DirtiesContext
 public class SslContextConfigInvalidPathTest {
 

@@ -10,23 +10,18 @@
   <artifactId>ee-artifacts</artifactId>
   <packaging>jar</packaging>
   <properties>
-    <!-- It would be silly to reformat generated source. -->
-    <jarranger.skip>true</jarranger.skip>
-    <!-- It would be silly to check generated source style. -->
     <checkstyle.skip>true</checkstyle.skip>
-    <lombok.version>1.18.6</lombok.version>
-    <jaxws-rt.version>2.3.2</jaxws-rt.version>
     <jaxws-maven-plugin.version>2.6.2</jaxws-maven-plugin.version>
-    <lombok-xjc-plugin.version>1.0.1</lombok-xjc-plugin.version>
+    <jaxws-rt.version>2.3.2</jaxws-rt.version>
+    <lombok-xjc-plugin.version>1.0.3</lombok-xjc-plugin.version>
+    <spotbugs.skip>true</spotbugs.skip>
   </properties>
   <dependencies>
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>${lombok.version}</version>
       <scope>provided</scope>
     </dependency>
-    <!-- jaxws-rt runtime dependency added as it is no longer longer provided int he JDK as of Java 11 -->
     <dependency>
       <groupId>com.sun.xml.ws</groupId>
       <artifactId>jaxws-rt</artifactId>
@@ -36,8 +31,6 @@
   <build>
     <plugins>
       <plugin>
-        <!-- com.helger.maven is a branch of org.codehaus.mojo jaws-maven-plugin that works with Java 12 -->
-        <!-- https://mvnrepository.com/artifact/com.helger.maven/jaxws-maven-plugin/2.6.2 -->
         <groupId>com.helger.maven</groupId>
         <artifactId>jaxws-maven-plugin</artifactId>
         <version>${jaxws-maven-plugin.version}</version>
@@ -70,26 +63,6 @@
             <version>${lombok-xjc-plugin.version}</version>
           </dependency>
         </dependencies>
-      </plugin>
-      <!-- It would be silly to reformat generated source. -->
-      <plugin>
-        <groupId>com.coveo</groupId>
-        <artifactId>fmt-maven-plugin</artifactId>
-        <version>${fmt-maven-plugin.version}</version>
-        <executions>
-          <execution>
-            <phase>none</phase>
-          </execution>
-        </executions>
-      </plugin>
-      <!-- It would be silly to run static analysis on generated source. -->
-      <plugin>
-        <groupId>com.github.spotbugs</groupId>
-        <artifactId>spotbugs-maven-plugin</artifactId>
-        <version>${spotbugs-maven-plugin.version}</version>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
       </plugin>
     </plugins>
   </build>
