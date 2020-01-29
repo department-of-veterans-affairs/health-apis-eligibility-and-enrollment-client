@@ -17,9 +17,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-  classes = SslContextConfigInvalidPasswordTest.TestConfiguration.class,
-  initializers = ConfigFileApplicationContextInitializer.class
-)
+    classes = SslContextConfigInvalidPasswordTest.TestConfiguration.class,
+    initializers = ConfigFileApplicationContextInitializer.class)
 @DirtiesContext
 public class SslContextConfigInvalidPasswordTest {
 

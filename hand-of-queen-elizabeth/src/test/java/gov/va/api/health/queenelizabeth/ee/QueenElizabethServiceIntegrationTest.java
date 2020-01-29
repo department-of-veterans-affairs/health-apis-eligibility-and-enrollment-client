@@ -30,14 +30,13 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @EnableAutoConfiguration
 @ContextConfiguration(
-  classes = {
-    QueenElizabethConfig.class,
-    MockEeSummarySoapServiceWsConfigurerAdapter.class,
-    MockEeSummaryEndpoint.class,
-    MockEeSummaryResponse.class
-  },
-  initializers = ConfigFileApplicationContextInitializer.class
-)
+    classes = {
+      QueenElizabethConfig.class,
+      MockEeSummarySoapServiceWsConfigurerAdapter.class,
+      MockEeSummaryEndpoint.class,
+      MockEeSummaryResponse.class
+    },
+    initializers = ConfigFileApplicationContextInitializer.class)
 public class QueenElizabethServiceIntegrationTest {
 
   @Autowired private QueenElizabethService service;

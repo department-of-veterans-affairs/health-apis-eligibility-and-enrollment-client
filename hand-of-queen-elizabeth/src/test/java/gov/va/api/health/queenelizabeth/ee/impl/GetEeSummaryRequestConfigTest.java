@@ -16,9 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-  classes = GetEeSummaryRequestConfigTest.TestConfiguration.class,
-  initializers = ConfigFileApplicationContextInitializer.class
-)
+    classes = GetEeSummaryRequestConfigTest.TestConfiguration.class,
+    initializers = ConfigFileApplicationContextInitializer.class)
 public class GetEeSummaryRequestConfigTest {
 
   @Autowired private GetEeSummaryRequestConfig config;

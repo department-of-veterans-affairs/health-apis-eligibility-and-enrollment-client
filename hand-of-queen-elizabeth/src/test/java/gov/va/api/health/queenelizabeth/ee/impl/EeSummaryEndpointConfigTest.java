@@ -16,9 +16,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(
-  classes = EeSummaryEndpointConfigTest.TestConfiguration.class,
-  initializers = ConfigFileApplicationContextInitializer.class
-)
+    classes = EeSummaryEndpointConfigTest.TestConfiguration.class,
+    initializers = ConfigFileApplicationContextInitializer.class)
 @DirtiesContext
 public class EeSummaryEndpointConfigTest {
 
