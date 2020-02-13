@@ -96,7 +96,7 @@ public class MockEeSummarySoapServiceWsConfigurerAdapter extends WsConfigurerAda
     MessageDispatcherServlet servlet = new MessageDispatcherServlet();
     servlet.setApplicationContext(applicationContext);
     servlet.setTransformWsdlLocations(true);
-    return new ServletRegistrationBean<MessageDispatcherServlet>(servlet, mockEeVersion + "/ws/*");
+    return new ServletRegistrationBean<>(servlet, mockEeVersion + "/ws/*");
   }
 
   /** Validation for user/password. */

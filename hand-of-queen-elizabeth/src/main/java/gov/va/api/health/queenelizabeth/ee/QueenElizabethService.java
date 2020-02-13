@@ -16,7 +16,6 @@ import javax.xml.ws.Binding;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.Handler;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -25,10 +24,8 @@ import org.springframework.beans.factory.annotation.Autowired;
  * configuration classes, fault handlers, and methods. Encapsulated eeSummary soap services are
  * named for consistency with the service.
  */
-@Slf4j
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class QueenElizabethService {
-
   public static final String MISSING_ICN_MESSAGE = "ICN must be non-null and non-blank.";
 
   private final EeSummaryEndpointConfig config;

@@ -7,16 +7,13 @@ import javax.xml.soap.SOAPEnvelope;
 import javax.xml.soap.SOAPException;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Custom soap handler used by Queen Elizabeth Service to optionally add WS Security Headers to soap
  * request messages.
  */
-@Slf4j
 @RequiredArgsConstructor
 public class WsSecurityHeaderSoapHandler extends BaseQueenElizabethSoapHandler {
-
   private final WsSecurityHeaderConfig config;
 
   /**
