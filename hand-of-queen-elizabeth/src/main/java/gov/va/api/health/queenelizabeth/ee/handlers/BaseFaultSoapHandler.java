@@ -7,17 +7,14 @@ import javax.xml.soap.SOAPFault;
 import javax.xml.soap.SOAPMessage;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 import lombok.NoArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * Base soap handler to facilitate throwing RequestFailed exceptions for fault conditions. This is
  * used as a base class for custom handlers to eliminate the need for them to implement default
  * functionality for parsing faults.
  */
-@Slf4j
 @NoArgsConstructor
 public class BaseFaultSoapHandler extends BaseQueenElizabethSoapHandler {
-
   public static final String FAULT_UNKNOWN_MESSAGE = "Unknown fault occurred.";
   public static final String FAULT_NULL_MESSAGE = "Fault received but is null.";
   public static final String FAULT_STRING_NULL_MESSAGE = "Fault received but string is null.";
