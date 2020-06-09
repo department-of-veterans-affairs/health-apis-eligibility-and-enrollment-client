@@ -212,7 +212,7 @@
             </xs:complexType>
             <xs:complexType name="associationCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="association" nillable="true" type="associationInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="association" nillable="true" type="associationInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="associationInfo">
@@ -329,7 +329,7 @@
             </xs:complexType>
             <xs:complexType name="addressCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="address" nillable="true" type="addressInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="address" nillable="true" type="addressInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="addressInfo">
@@ -413,12 +413,12 @@
             </xs:complexType>
             <xs:complexType name="confidentialAddressCategoryCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="confidentialAddressCategoryType" nillable="true" type="xs:string"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="confidentialAddressCategoryType" nillable="true" type="xs:string"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="emailCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="email" nillable="true" type="emailInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="email" nillable="true" type="emailInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="emailInfo">
@@ -442,7 +442,7 @@
             </xs:complexType>
             <xs:complexType name="phoneCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="phone" nillable="true" type="phoneInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="phone" nillable="true" type="phoneInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="phoneInfo">
@@ -478,7 +478,7 @@
                 <xs:sequence>
 <!-- <xs:element name="race" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="race" nillable="true">
+                    <xs:element maxOccurs="1000" minOccurs="0" name="race" nillable="true">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:enumeration value="American Indian or Alaska Native"/>
@@ -608,7 +608,7 @@
             </xs:complexType>
             <xs:complexType name="cdConditionCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="cdCondition" nillable="true" type="cdConditionInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="cdCondition" nillable="true" type="cdConditionInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="cdConditionInfo">
@@ -620,7 +620,7 @@
             </xs:complexType>
             <xs:complexType name="cdProcedureCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="cdProcedure" nillable="true" type="cdProcedureInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="cdProcedure" nillable="true" type="cdProcedureInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="cdProcedureInfo">
@@ -633,7 +633,7 @@
                 <xs:sequence>
 <!-- <xs:element name="diagnosis" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 -->
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="diagnosis" nillable="true">
+                    <xs:element maxOccurs="1000" minOccurs="0" name="diagnosis" nillable="true">
                         <xs:simpleType>
                             <xs:restriction base="xs:string">
                                 <xs:enumeration value="Quadriplegia, C1-C4, Complete"/>
@@ -709,7 +709,7 @@
             </xs:complexType>
             <xs:complexType name="monetaryBenefitCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="monetaryBenefit" nillable="true" type="monetaryBenefitInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="monetaryBenefit" nillable="true" type="monetaryBenefitInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="monetaryBenefitInfo">
@@ -745,7 +745,7 @@
             </xs:complexType>
             <xs:complexType name="eligibilityCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="eligibility" nillable="true" type="eligibilityInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="eligibility" nillable="true" type="eligibilityInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="eligibilityInfo">
@@ -770,7 +770,7 @@
             </xs:complexType>
             <xs:complexType name="ratedDisabilityCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ratedDisability" nillable="true" type="ratedDisabilityInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="ratedDisability" nillable="true" type="ratedDisabilityInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ratedDisabilityInfo">
@@ -808,7 +808,7 @@
             </xs:complexType>
             <xs:complexType name="feeBasisCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="feeBasis" nillable="true" type="feeBasisInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="feeBasis" nillable="true" type="feeBasisInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="feeBasisInfo">
@@ -832,7 +832,7 @@
             </xs:complexType>
             <xs:complexType name="beneficiaryTravelCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="beneficiaryTravel" nillable="true" type="beneficiaryTravelInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="beneficiaryTravel" nillable="true" type="beneficiaryTravelInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="beneficiaryTravelInfo">
@@ -871,7 +871,7 @@
             </xs:complexType>
             <xs:complexType name="dependentFinancialsCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="dependentFinancials" nillable="true" type="dependentFinancialsInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="dependentFinancials" nillable="true" type="dependentFinancialsInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="dependentFinancialsInfo">
@@ -925,7 +925,7 @@
             </xs:complexType>
             <xs:complexType name="ssnCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ssn" nillable="true" type="ssnInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="ssn" nillable="true" type="ssnInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ssnInfo">
@@ -943,7 +943,7 @@
             </xs:complexType>
             <xs:complexType name="assetCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="asset" nillable="true" type="assetInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="asset" nillable="true" type="assetInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="assetInfo">
@@ -960,7 +960,7 @@
             </xs:complexType>
             <xs:complexType name="expenseCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="expense" nillable="true" type="expenseInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="expense" nillable="true" type="expenseInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="expenseInfo">
@@ -972,7 +972,7 @@
             </xs:complexType>
             <xs:complexType name="incomeCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="income" nillable="true" type="incomeInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="income" nillable="true" type="incomeInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="incomeInfo">
@@ -984,7 +984,7 @@
             </xs:complexType>
             <xs:complexType name="spouseFinancialsCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="spouseFinancials" nillable="true" type="spouseFinancialsInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="spouseFinancials" nillable="true" type="spouseFinancialsInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="spouseFinancialsInfo">
@@ -1074,7 +1074,7 @@
             </xs:complexType>
             <xs:complexType name="incomeTestStatusCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="status" nillable="true" type="incomeTestStatusInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="status" nillable="true" type="incomeTestStatusInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="incomeTestStatusInfo">
@@ -1095,7 +1095,7 @@
             </xs:complexType>
             <xs:complexType name="insuranceCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="insurance" nillable="true" type="insuranceInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="insurance" nillable="true" type="insuranceInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="insuranceInfo">
@@ -1217,7 +1217,7 @@
             </xs:complexType>
             <xs:complexType name="combatEpisodeCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="combatEpisode" nillable="true" type="combatEpisodeInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="combatEpisode" nillable="true" type="combatEpisodeInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="combatEpisodeInfo">
@@ -1232,7 +1232,7 @@
             </xs:complexType>
             <xs:complexType name="militaryServiceSiteRecordCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="militaryServiceSiteRecord" nillable="true" type="militaryServiceSiteRecordInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="militaryServiceSiteRecord" nillable="true" type="militaryServiceSiteRecordInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="militaryServiceSiteRecordInfo">
@@ -1245,7 +1245,7 @@
             </xs:complexType>
             <xs:complexType name="conflictExperienceCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="conflictExperience" nillable="true" type="conflictExperienceInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="conflictExperience" nillable="true" type="conflictExperienceInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="conflictExperienceInfo">
@@ -1257,7 +1257,7 @@
             </xs:complexType>
             <xs:complexType name="militaryServiceEpisodeCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="militaryServiceEpisode" nillable="true" type="militaryServiceEpisodeInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="militaryServiceEpisode" nillable="true" type="militaryServiceEpisodeInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="militaryServiceEpisodeInfo">
@@ -1277,7 +1277,7 @@
             </xs:complexType>
             <xs:complexType name="powEpisodeCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="episode" nillable="true" type="powEpisodeInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="episode" nillable="true" type="powEpisodeInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="powEpisodeInfo">
@@ -1296,7 +1296,7 @@
             </xs:complexType>
             <xs:complexType name="relationCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="relation" nillable="true" type="relationInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="relation" nillable="true" type="relationInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="sensitivityInfo">
@@ -1339,7 +1339,7 @@
             </xs:complexType>
             <xs:complexType name="preferredFacilityCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="preferredFacilityInfo" nillable="true" type="preferredFacilityInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="preferredFacilityInfo" nillable="true" type="preferredFacilityInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="preferredFacilityInfo">
@@ -1402,7 +1402,7 @@
             </xs:complexType>
             <xs:complexType name="vamcDataCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="vamcInfo" nillable="true" type="eeSummary:vamcInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="vamcInfo" nillable="true" type="eeSummary:vamcInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="vamcInfo">
@@ -1431,7 +1431,7 @@
             </xs:complexType>
             <xs:complexType name="vceEligibilityCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="eligibility" nillable="true" type="vceEligibilityInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="eligibility" nillable="true" type="vceEligibilityInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="geocodingInfo">
@@ -1464,7 +1464,7 @@
             </xs:complexType>
             <xs:complexType name="healthBenefitPlanCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="healthBenefitPlan" nillable="true" type="healthBenefitPlanInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="healthBenefitPlan" nillable="true" type="healthBenefitPlanInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="healthBenefitPlanInfo">
@@ -1482,7 +1482,7 @@
             </xs:complexType>
             <xs:complexType name="ivmCandidateCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="candidate" type="eeSummary:ivmCandidateInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="1" name="candidate" type="eeSummary:ivmCandidateInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ivmCandidateInfo">
@@ -1494,7 +1494,7 @@
             </xs:complexType>
             <xs:complexType name="ivmLetterCandidateCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="ivmLetterCandidate" type="eeSummary:ivmLetterCandidateInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="1" name="ivmLetterCandidate" type="eeSummary:ivmLetterCandidateInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ivmLetterCandidateInfo">
@@ -1508,7 +1508,7 @@
             </xs:complexType>
             <xs:complexType name="ivmLetterStatusCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="ivmLetterStatus" type="eeSummary:ivmLetterStatusInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="1" name="ivmLetterStatus" type="eeSummary:ivmLetterStatusInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="ivmLetterStatusInfo">
@@ -1520,7 +1520,7 @@
             </xs:complexType>
             <xs:complexType name="nameCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="name" type="eeSummary:nameInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="1" name="name" type="eeSummary:nameInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="nameInfo">
@@ -1530,7 +1530,7 @@
             </xs:complexType>
             <xs:complexType name="nonPrimaryFinancialStatementCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="1" name="nonPrimaryFinancialStatement" type="eeSummary:nonPrimaryFinancialStatementInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="1" name="nonPrimaryFinancialStatement" type="eeSummary:nonPrimaryFinancialStatementInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:complexType name="nonPrimaryFinancialStatementInfo">
@@ -1582,7 +1582,7 @@
             <xs:complexType name="getIVMLetterStatusesRequest"/>
             <xs:complexType name="dependentCollection">
                 <xs:sequence>
-                    <xs:element maxOccurs="unbounded" minOccurs="0" name="dependent" type="eeSummary:dependentInfo"/>
+                    <xs:element maxOccurs="1000" minOccurs="0" name="dependent" type="eeSummary:dependentInfo"/>
                 </xs:sequence>
             </xs:complexType>
             <xs:element name="sendIVMUpdatesResponse">
