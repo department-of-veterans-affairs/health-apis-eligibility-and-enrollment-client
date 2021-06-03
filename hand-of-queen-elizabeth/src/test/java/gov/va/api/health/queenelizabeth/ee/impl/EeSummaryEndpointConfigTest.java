@@ -1,17 +1,20 @@
 package gov.va.api.health.queenelizabeth.ee.impl;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * Test loading an EeSummaryEndpointConfig configuration from properties and forcefully testing the
  * case where the url is not configured resulting in the default wsdl url usage.
  */
+@ExtendWith(SpringExtension.class)
 @ContextConfiguration(
     classes = EeSummaryEndpointConfigTest.TestConfiguration.class,
     initializers = ConfigFileApplicationContextInitializer.class)

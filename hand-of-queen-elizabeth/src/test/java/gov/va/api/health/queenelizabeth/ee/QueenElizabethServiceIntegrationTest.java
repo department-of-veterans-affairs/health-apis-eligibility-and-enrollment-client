@@ -14,17 +14,20 @@ import gov.va.med.esr.webservices.jaxws.schemas.GetEESummaryResponse;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.ConfigFileApplicationContextInitializer;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
  * Perform service integration test with a mock SOAP server to test nominal and fault responses. The
  * SpringBootTest is specified to instantiate an actual service for the integration test to use the
  * defined port (pulled from application.properties).
  */
+@ExtendWith(SpringExtension.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 @EnableAutoConfiguration
 @ContextConfiguration(
